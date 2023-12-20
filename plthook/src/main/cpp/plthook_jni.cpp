@@ -1,45 +1,105 @@
 #include <jni.h>
 #include <string>
+#include "plthook.h"
 
 #define BH_JNI_VERSION JNI_VERSION_1_6
 #define BH_JNI_CLASS_NAME "com/example/plthook/PLTHook"
 
 static jstring bh_jni_get_version(JNIEnv *env, jclass interface) {
-    return NULL;
+    (void) interface;
+    return env->NewStringUTF(plt_hook_get_version());
 }
 
 static jint bh_jni_init(JNIEnv *env, jclass interface, jint mode, jboolean debug) {
-    return 1;
+    (void) env;
+    (void) interface;
+    return plt_hook_init(mode, debug);
 }
 
 static jint bh_jni_add_ignore(JNIEnv *env, jclass interface, jstring caller_path_name) {
-    return 1;
+    (void) env;
+    (void) interface;
+
+    int r = PLT_HOOK_STATUS_CODE_IGNORE;
+    if (!caller_path_name){
+        return r;
+    }
+
+    const char *c_caller_path_name;
+    if (NULL == (c_caller_path_name = env->GetStringUTFChars(caller_path_name, 0))) {
+        goto clean;
+    }
+
+    r = plt_hook_add_ignore(c_caller_path_name);
+
+    clean:
+    if (caller_path_name && c_caller_path_name) {
+        env->ReleaseStringUTFChars(caller_path_name, c_caller_path_name);
+    }
+    return r;
 }
 
 static jint bh_jni_get_mode(JNIEnv *env, jclass interface) {
-    return 1;
+    (void) env;
+    (void) interface;
+
+    return PLT_HOOK_MODE_AUTOMATIC == plt_hook_get_mode() ? 0 : 1;
 }
 static jboolean bh_jni_get_debug(JNIEnv *env, jclass interface) {
-    return JNI_TRUE;
+    (void) env;
+    (void) interface;
+
+    return plt_hook_get_debug();
 }
 static void bh_jni_set_debug(JNIEnv *env, jclass interface, jboolean debug) {
+    (void) env;
+    (void) interface;
 
+    plt_hook_set_debug(debug);
 }
 
 static jboolean bh_jni_get_recordable(JNIEnv *env, jclass interface) {
-    return JNI_TRUE;
+    (void) env;
+    (void) interface;
+
+    return plt_hook_get_recordable();
 }
 
 static void bh_jni_set_recordable(JNIEnv *env, jclass interface, jboolean recordable) {
+    (void) env;
+    (void) interface;
 
+    plt_hook_set_recordable(recordable);
 }
 
 static jstring bh_jni_get_records(JNIEnv *env, jclass interface, jint item_flags) {
-    return NULL;
+    (void) interface;
+
+    char *str = plt_hook_get_records(item_flags);
+    if (NULL == str) {
+        return NULL;
+    }
+
+    jstring jstr = env->NewStringUTF(str);
+    free(str);
+    return jstr;
 }
 
 static jstring bh_jni_get_arch(JNIEnv *env, jclass interface) {
-    return NULL;
+    (void) interface;
+
+#if defined(__arm__)
+    char *arch = "arm";
+#elif defined(__aarch64__)
+    char *arch = "arm64";
+#elif defined(__i386__)
+    char *arch = "x86";
+#elif defined(__x86_64__)
+    char *arch = "x86_64";
+#else
+  char *arch = "unsupported";
+#endif
+    return env->NewStringUTF(arch);
 }
 
 static JNINativeMethod methods[] = {

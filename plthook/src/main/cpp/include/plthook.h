@@ -89,8 +89,59 @@ extern "C" {
 #define PLT_HOOK_RECORD_ITEM_ERRNO           (1 << 6)
 #define PLT_HOOK_RECORD_ITEM_STUB            (1 << 7)
 
+    char *plt_hook_get_records(uint32_t item_flags);
+    void plt_hook_dump_records(int fd, uint32_t item_flags);
+
+    void *plt_hook_get_prev_func(void *func);
+
+    void plt_hook_pop_stack(void *return_address);
+
+    typedef void (*plt_hook_pre_dlopen_t)(const char *filename, void *data);
+
+    typedef void (*plt_hook_post_dlopen_t)(const char *filename, int result, void *data);
+
+    void plt_hook_add_dlopen_callback(plt_hook_pre_dlopen_t pre, plt_hook_post_dlopen_t post, void *data);
+
+    void plt_hook_delete_dlopen_callback(plt_hook_pre_dlopen_t pre, plt_hook_post_dlopen_t post, void *data);
+
+#ifdef __cplusplus
+};
+#endif
+
+#ifdef __cplusplus
+#define PLT_HOOK_CALL_PREV(func, ...)((decltype(&(func)))plt_hook_get_prev_func((void *)(func)))(__VA_ARGS__)
+#else
+#define PLT_HOOK_CALL_PREV(func, func_sig, ...)((func_sig)plt_hook_get_prev_func((void *)(func)))(__VA_ARGS__)
+#endif
+
+#define PLT_HOOK_RETURN_ADDRESS() ((void *)(PLT_HOOK_MODE_AUTOMATIC == plt_hook_get_mode() ? plt_hook_get_return_address() : __builtin_return_address(0)))
+
+#define PLT_HOOK_POP_STACK() \
+do{                          \
+    if(PLT_HOOK_MODE_AUTOMATIC == plt_hook_get_mode()) plt_hook_pop_stack(__builtin_return_address(0));                             \
+} while(0)
+
+
+#ifdef __cplusplus
+
+class PLTHookStackScope{
+public:
+    PLTHookStackScope(void *return_address): return_address_(return_address) {
+
+    }
+
+    ~PLTHookStackScope(){
+        if (PLT_HOOK_MODE_AUTOMATIC == plt_hook_get_mode()) {
+            plt_hook_pop_stack(return_address_);
+        }
+    }
+
+private:
+    void *return_address_;
+
 };
 
-
+#define PLT_HOOK_STACK_SCOPE() PLTHookStackScope plt_hook_stack_scope_obj(__builtin_return_address(0))
+#endif
 
 #endif //NATIVEHOOK_PLTHOOK_H
