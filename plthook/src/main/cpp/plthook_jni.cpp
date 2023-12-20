@@ -126,6 +126,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
     if (__predict_false(vm->GetEnv((void **) &env, BH_JNI_VERSION) != JNI_OK)) {
         return JNI_ERR;
     }
+
     if (__predict_false(NULL == env)) {
         return JNI_ERR;
     }
