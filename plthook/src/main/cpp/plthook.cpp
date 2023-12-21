@@ -17,5 +17,6 @@ const char *plt_hook_get_version(void) {
 
 int plt_hook_init(int mode, bool debug) {
 
+    return 0;
 }
 
