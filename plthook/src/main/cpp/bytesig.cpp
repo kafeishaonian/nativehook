@@ -139,7 +139,7 @@ __attribute__((noinline)) static void bytesig_handler_internal(int signum, sigin
         bytesig_sigorset##suffix(&prev_mask, &(((ucontext_t *)context)->uc_sigmask##suffix),        \
                                  &(sig->prev_action##suffix.sa_mask));                              \
         if (0 == ((unsigned int)(sig->prev_action##suffix.sa_flags) & (unsigned int)SA_NODEFER)) {  \
-            sigaddset##suffix(&prev_mask, signum);                                                    \
+            sigaddset##suffix(&prev_mask, signum);                                                  \
         }                                                                                           \
         sigaddset##suffix(&prev_mask, SIGPIPE);                                                     \
         sigaddset##suffix(&prev_mask, SIGUSR1);                                                     \
@@ -193,6 +193,9 @@ int bytesig_init(int signum) {
         goto end;
     }
     if (__predict_false(NULL != bytesig_signal_array[signum])) {
+        if (__predict_false(sig != NULL)){
+            free(sig);
+        }
         goto end;
     }
 
