@@ -5,8 +5,6 @@
 #ifndef NATIVEHOOK_BH_SLEB128_H
 #define NATIVEHOOK_BH_SLEB128_H
 
-
-#pragma once
 #include <stddef.h>
 #include <stdint.h>
 

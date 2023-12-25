@@ -5,8 +5,6 @@
 #ifndef NATIVEHOOK_BH_UTIL_H
 #define NATIVEHOOK_BH_UTIL_H
 
-
-#pragma once
 #include <android/api-level.h>
 #include <ctype.h>
 #include <elf.h>

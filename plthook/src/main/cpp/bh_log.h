@@ -5,7 +5,6 @@
 #ifndef NATIVEHOOK_BH_LOG_H
 #define NATIVEHOOK_BH_LOG_H
 
-#pragma once
 #include <android/log.h>
 #include <stdarg.h>
 #include <stdbool.h>

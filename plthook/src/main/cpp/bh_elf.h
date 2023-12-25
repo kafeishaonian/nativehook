@@ -5,7 +5,6 @@
 #ifndef NATIVEHOOK_BH_ELF_H
 #define NATIVEHOOK_BH_ELF_H
 
-#pragma once
 #include <elf.h>
 #include <link.h>
 #include <pthread.h>
