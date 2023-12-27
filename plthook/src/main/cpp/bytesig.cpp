@@ -188,14 +188,13 @@ int bytesig_init(int signum) {
     static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
     pthread_mutex_lock(&lock);
     int ret = -1;
-    bytesig_signal_t *sig= static_cast<bytesig_signal_t *>(calloc(1, sizeof(bytesig_signal_t)));
-    if (__predict_false(NULL == sig)) {
+    bytesig_signal_t *sig;
+    if (__predict_false(NULL != bytesig_signal_array[signum])) {
         goto end;
     }
-    if (__predict_false(NULL != bytesig_signal_array[signum])) {
-        if (__predict_false(sig != NULL)){
-            free(sig);
-        }
+
+    sig = static_cast<bytesig_signal_t *>(calloc(1, sizeof(bytesig_signal_t)));
+    if (__predict_false(NULL == sig)) {
         goto end;
     }
 
