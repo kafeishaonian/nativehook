@@ -23,3 +23,7 @@ P
  plthook/src/main/cpp/bh_util.cpp,5/1/51eda040c8fbe18f026feed9584d90dbe82cbd8c
 P
  plthook/src/main/cpp/bytesig.cpp,4/0/402a3874b9eacedd4424ea5b2317fa23a4455e89
+O
+plthook/src/main/cpp/bh_cfi.cpp,9/d/9dc3769b9589f3da2ff36a04ef81a0f6392a216d
+O
+plthook/src/main/cpp/bh_const.h,2/f/2fee577aab4f94f62bbb7f4b16ff79ef96af96e0
