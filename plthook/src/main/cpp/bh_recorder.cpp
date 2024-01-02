@@ -252,6 +252,15 @@ int bh_recorder_add_hook(int error_number, const char *lib_name, const char *sym
     size_t caller_lib_name_len = strlen(caller_lib_name);
 
     uint16_t lib_name_idx, sym_name_idx, caller_lib_name_idx;
+    bh_recorder_record_hook_header_t header = {BH_RECORDER_OP_HOOK,
+                                               (uint8_t)error_number,
+                                               bh_recorder_get_timestamp_ms(),
+                                               stub,
+                                               caller_lib_name_idx,
+                                               lib_name_idx,
+                                               sym_name_idx,
+                                               new_addr};
+    int r;
     if (0 != bh_recorder_add_str(lib_name, lib_name_len, &lib_name_idx)) {
         goto err;
     }
@@ -261,17 +270,8 @@ int bh_recorder_add_hook(int error_number, const char *lib_name, const char *sym
     if (0 != bh_recorder_add_str(caller_lib_name, caller_lib_name_len, &caller_lib_name_idx)) {
         goto err;
     }
-
-    bh_recorder_record_hook_header_t header = {BH_RECORDER_OP_HOOK,
-                                               (uint8_t)error_number,
-                                               bh_recorder_get_timestamp_ms(),
-                                               stub,
-                                               caller_lib_name_idx,
-                                               lib_name_idx,
-                                               sym_name_idx,
-                                               new_addr};
     pthread_mutex_lock(&bh_recorder_records.lock);
-    int r = bh_recorder_buf_append(&bh_recorder_records, BH_RECORDER_RECORDS_BUG_EXPAND_STEP,
+    r = bh_recorder_buf_append(&bh_recorder_records, BH_RECORDER_RECORDS_BUG_EXPAND_STEP,
                                    BH_RECORDER_RECORDS_BUF_MAX, &header, sizeof(header), NULL, 0);
     pthread_mutex_unlock(&bh_recorder_records.lock);
     if (0 != r) {
@@ -318,6 +318,168 @@ int bh_recorder_add_unhook(int error_number, uintptr_t stub, uintptr_t caller_ad
     bh_recorder_error = true;
     return -1;
 }
+
+
+static const char *bh_recorder_get_op_name(uint8_t op) {
+    switch (op) {
+        case BH_RECORDER_OP_HOOK:
+            return "hook";
+        case BH_RECORDER_OP_UNHOOK:
+            return "unhook";
+        default:
+            return "error";
+    }
+}
+
+static void bh_recorder_output(char **str, int fd, uint32_t item_flags) {
+    if (NULL == bh_recorder_records.ptr || 0 == bh_recorder_records.sz) {
+        return;
+    }
+
+    bh_recorder_buf_t output = {NULL, 0, 0, PTHREAD_MUTEX_INITIALIZER};
+
+    pthread_mutex_lock(&bh_recorder_records.lock);
+    pthread_mutex_lock(&bh_recorder_strings.lock);
+
+    char line[BH_RECORDER_LIB_NAME_MAX * 2 + BH_RECORDER_SYM_NAME_MAX + 256];
+    size_t line_sz;
+    size_t i = 0;
+    while (i < bh_recorder_records.sz) {
+        line_sz = 0;
+        bh_recorder_record_hook_header_t *header = (bh_recorder_record_hook_header_t *)((uintptr_t)bh_recorder_records.ptr + i);
+
+        if (item_flags & PLT_HOOK_RECORD_ITEM_TIMESTAMP) {
+            line_sz += bh_recorder_format_timestamp_ms(header->ts_ms, line + line_sz, sizeof(line) - line_sz);
+        }
+
+        if (item_flags & PLT_HOOK_RECORD_ITEM_CALLER_LIB_NAME) {
+            line_sz += bh_util_snprintf(line + line_sz, sizeof(line) - line_sz, "%s,",
+                                        bh_recorder_find_str(header->caller_lib_name_idx));
+        }
+
+        if (item_flags & PLT_HOOK_RECORD_ITEM_OP) {
+            line_sz += bh_util_snprintf(line + line_sz, sizeof(line) - line_sz, "%s,",
+                                        bh_recorder_get_op_name(header->op));
+        }
+
+        if ((item_flags & PLT_HOOK_RECORD_ITEM_LIB_NAME) && header->op != BH_RECORDER_OP_UNHOOK) {
+            line_sz += bh_util_snprintf(line + line_sz, sizeof(line) - line_sz, "%s,",
+                                        bh_recorder_find_str(header->lib_name_idx));
+        }
+
+        if ((item_flags & PLT_HOOK_RECORD_ITEM_SYM_NAME) && header->op != BH_RECORDER_OP_UNHOOK) {
+            line_sz += bh_util_snprintf(line + line_sz, sizeof(line) - line_sz, "%s,",
+                                        bh_recorder_find_str(header->sym_name_idx));
+        }
+
+        if ((item_flags & PLT_HOOK_RECORD_ITEM_NEW_ADDR) && header->op != BH_RECORDER_OP_UNHOOK) {
+            line_sz += bh_util_snprintf(line + line_sz, sizeof(line) - line_sz, "%" PRIxPTR ",",
+                                        header->new_addr);
+        }
+
+        if (item_flags & PLT_HOOK_RECORD_ITEM_ERRNO) {
+            line_sz += bh_util_snprintf(line + line_sz, sizeof(line) - line_sz, "%" PRIu8 ",",
+                                     header->error_number);
+        }
+
+        if (item_flags & PLT_HOOK_RECORD_ITEM_STUB) {
+            line_sz += bh_util_snprintf(line + line_sz, sizeof(line) - line_sz, "%" PRIxPTR ",",
+                                        header->stub);
+        }
+        line[line_sz - 1] = '\n';
+
+        if (NULL != str) {
+            if (0 != bh_recorder_buf_append(&output, BH_RECORDER_OUTPUT_BUF_EXPAND_STEP, BH_RECORDER_OUTPUT_BUF_MAX,
+                                            line, line_sz, NULL, 0)) {
+                bh_recorder_buf_free(&output);
+                break;
+            }
+        } else {
+            if (0 != bh_util_write(fd, line, line_sz)) {
+                break;
+            }
+        }
+
+        i += (BH_RECORDER_OP_UNHOOK == header->op ? sizeof(bh_recorder_record_unhook_header_t)
+                : sizeof(bh_recorder_record_hook_header_t));
+
+    }
+
+    pthread_mutex_unlock(&bh_recorder_strings.lock);
+    pthread_mutex_unlock(&bh_recorder_records.lock);
+
+    if (bh_recorder_error) {
+        line_sz = 0;
+
+        if (item_flags & PLT_HOOK_RECORD_ITEM_TIMESTAMP) {
+            line_sz += bh_util_snprintf(line + line_sz, sizeof(line) - line_sz,
+                                        "9999-99-99T00:00:00.000+00:00,");
+        }
+        if (item_flags & PLT_HOOK_RECORD_ITEM_CALLER_LIB_NAME) {
+            line_sz += bh_util_snprintf(line + line_sz, sizeof(line) - line_sz, "error,");
+        }
+        if (item_flags & PLT_HOOK_RECORD_ITEM_OP) {
+            line_sz += bh_util_snprintf(line + line_sz, sizeof(line) - line_sz, "error,");
+        }
+
+        if (0 == line_sz) {
+            line_sz = bh_util_snprintf(line + line_sz, sizeof(line) - line_sz, "error,");
+        }
+
+        line[line_sz - 1] = '\n';
+
+        if (NULL != str) {
+            if (0 != bh_recorder_buf_append(&output, BH_RECORDER_OUTPUT_BUF_EXPAND_STEP, BH_RECORDER_OUTPUT_BUF_MAX,
+                                            line, line_sz, NULL, 0)) {
+                bh_recorder_buf_free(&output);
+                return;
+            }
+        } else {
+            if (0 != bh_util_write(fd, line, line_sz)) {
+                return;
+            }
+        }
+    }
+
+    if (NULL != str) {
+        if (0 != bh_recorder_buf_append(&output, BH_RECORDER_OUTPUT_BUF_EXPAND_STEP, BH_RECORDER_OUTPUT_BUF_MAX,
+                                        "", 1, NULL, 0)) {
+            bh_recorder_buf_free(&output);
+            return;
+        }
+        *str = static_cast<char *>(output.ptr);
+    }
+}
+
+char *bh_recorder_get(uint32_t item_flags) {
+    if (!bh_recorder_recordable) {
+        return NULL;
+    }
+    if (0 == (item_flags & PLT_HOOK_RECORD_ITEM_ALL)) {
+        return NULL;
+    }
+
+    char *str = NULL;
+    bh_recorder_output(&str, -1, item_flags);
+    return str;
+}
+
+void bh_recorder_dump(int fd, uint32_t item_flags) {
+    if (!bh_recorder_recordable) {
+        return;
+    }
+
+    if (0 == (item_flags & PLT_HOOK_RECORD_ITEM_ALL)) {
+        return;
+    }
+
+    if (fd < 0) {
+        return;
+    }
+
+    bh_recorder_output(NULL, fd, item_flags);
+}
+
 
 
 
