@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include "bh_recorder.h"
 
 const char *plt_hook_get_version(void) {
     return PLT_HOOK_VERSION;
