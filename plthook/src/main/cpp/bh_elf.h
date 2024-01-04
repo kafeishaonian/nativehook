@@ -112,7 +112,7 @@ void bh_elf_unset_exist(bh_elf_t *self);
 bool bh_elf_is_exist(bh_elf_t *self);
 
 //通过地址获取保护信息
-int bh_elf_get_protect_by_address(bh_elf_t *self, void *addr);
+int bh_elf_get_protect_by_address(bh_elf_t *self, void *address);
 
 //根据符号名称查找导出函数符号信息
 //signal-safe
@@ -127,12 +127,7 @@ size_t bh_elf_find_import_func_address_by_callee_address(bh_elf_t *self, void *t
                                                          size_t address_array_cap);
 
 //根据符号名查找导出函数地址(等于dlsym())
-void *hb_elf_find_export_func_address_by_symbol_name(bh_elf_t *self, const char *sym_name);
-
-
-
-
-
+void *bh_elf_find_export_func_address_by_symbol_name(bh_elf_t *self, const char *sym_name);
 
 
 #endif //NATIVEHOOK_BH_ELF_H
