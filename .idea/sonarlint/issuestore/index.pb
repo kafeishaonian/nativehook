@@ -9,8 +9,6 @@ j
 :app/src/main/java/com/example/nativehook/MainActivity.java,4/c/4ce5aa4512ad7998b22173db839c72d2b5b454a8
 N
 plthook/src/main/cpp/bh_util.h,f/8/f88236864b9fa17e4fcd45bea58e13cec7f14f86
-U
-%plthook/src/main/cpp/bh_elf_manager.h,4/8/48e39b59e5988f5d876b71a838c8f7ce72097387
 P
  plthook/src/main/cpp/bh_util.cpp,5/1/51eda040c8fbe18f026feed9584d90dbe82cbd8c
 P
@@ -32,4 +30,40 @@ R
 P
  plthook/src/main/cpp/bh_trampo.h,5/a/5a2045d2f8461fd7536d4bd4a6c5d3982f857b07
 P
+ plthook/src/main/cpp/bh_linker.h,c/2/c2fbfc3f11626da2e9be3d71e068b6c52e089596
+R
+"plthook/src/main/cpp/bh_linker.cpp,f/e/fe8f962d0a99b254fcf0b5a6c5606eac4e713d7d
+O
+plthook/src/main/cpp/bh_cfi.cpp,9/d/9dc3769b9589f3da2ff36a04ef81a0f6392a216d
+O
+plthook/src/main/cpp/bh_const.h,2/f/2fee577aab4f94f62bbb7f4b16ff79ef96af96e0
+N
+plthook/src/main/cpp/bh_dl.cpp,c/6/c631ca3c69942962ee64957c9a399e8d76404c76
+L
+plthook/src/main/cpp/bh_dl.h,d/7/d79a5b83a265c82341db31c96ce325c8850b9613
+V
+&plthook/src/main/cpp/bh_dl_iterate.cpp,c/f/cfeec19f05febbafe9195c1ee6a25a8fbd2c0790
+T
+$plthook/src/main/cpp/bh_dl_iterate.h,2/b/2b47387dda894c50aa2756507e52bc8dfc432a5e
+M
+plthook/src/main/cpp/bh_cfi.h,9/e/9e608f007b6ad992fe64defdcefd5a67f4879002
+M
+plthook/src/main/cpp/bh_elf.h,6/3/638fa37a59a1a252ebd9f40d25361761af8bbbf2
+O
+plthook/src/main/cpp/bh_elf.cpp,0/a/0aaec3263467fc81155e4ac65cfc527248c5e8ab
+U
+%plthook/src/main/cpp/bh_elf_manager.h,4/8/48e39b59e5988f5d876b71a838c8f7ce72097387
+W
+'plthook/src/main/cpp/bh_elf_manager.cpp,7/d/7d8d521c658b0a0bb73dd61e1a272309ddb1bd3a
+V
+&plthook/src/main/cpp/include/plthook.h,b/8/b82d8f73ad3e208d86cf956946ae83c0912f56bb
+P
  plthook/src/main/cpp/plthook.cpp,d/e/de4430fe0cd9f06596fec9dea443aac7c0d4b3ce
+\
+,plthook/src/main/cpp/third_party/bsd/queue.h,6/7/679f806c3d7fca4c3c581fc50e1a2f5fe8f9aeeb
+P
+ plthook/src/main/cpp/bh_hook.cpp,b/9/b9692bb426306bff3c283282e355d94d4ebe6bfa
+N
+plthook/src/main/cpp/bh_hook.h,4/9/4962009932d93121eede0e7268c5c39a436ae8d0
+S
+#plthook/src/main/cpp/CMakeLists.txt,e/a/ea5a02ad0ef87684645efaddfad2dbac77b25582

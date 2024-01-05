@@ -611,9 +611,9 @@ static bool bh_elf_find_import_func_addr_by_symbol_name_unsafe_aps2_cb(Elf_Reloc
     void **pkg = (void **) arg;
     bh_elf_t *self = (bh_elf_t *) *pkg++;
     const ElfW(Sym) *sym = (const ElfW(Sym) *) *pkg++;
-    void **addr_array = (void **) *pkg++;
-    size_t addr_array_cap = (size_t) *pkg++;
-    size_t *addr_array_sz = (size_t *) *pkg;
+    void **address_array = (void **) *pkg++;
+    size_t address_array_cap = (size_t) *pkg++;
+    size_t *address_array_sz = (size_t *) *pkg;
 
     if (&(self->dynsym[BH_ELF_R_SYM(rel->r_info)]) != sym) {
         return true;
@@ -623,14 +623,14 @@ static bool bh_elf_find_import_func_addr_by_symbol_name_unsafe_aps2_cb(Elf_Reloc
         return true;
     }
 
-    addr_array[(*addr_array_sz)++] = (void *) (self->load_bias + rel->r_offset);
-    return *addr_array_sz < addr_array_cap;
+    address_array[(*address_array_sz)++] = (void *) (self->load_bias + rel->r_offset);
+    return *address_array_sz < address_array_cap;
 }
 
 static size_t
 bh_elf_find_import_func_addr_by_symbol_name_unsafe(bh_elf_t *self, const char *sym_name,
-                                                   void **addr_array, size_t addr_array_cap) {
-    size_t addr_array_sz = 0;
+                                                   void **address_array, size_t address_array_cap) {
+    size_t address_array_sz = 0;
 
     ElfW(Sym) *sym = bh_elf_find_import_func_symbol_by_symbol_name(self, sym_name);
     if (NULL == sym) {
@@ -646,9 +646,9 @@ bh_elf_find_import_func_addr_by_symbol_name_unsafe(bh_elf_t *self, const char *s
             continue;
         }
 
-        addr_array[addr_array_sz++] = (void *) (self->load_bias + rel->r_offset);
-        if (addr_array_sz >= addr_array_cap) {
-            return addr_array_sz;
+        address_array[address_array_sz++] = (void *) (self->load_bias + rel->r_offset);
+        if (address_array_sz >= address_array_cap) {
+            return address_array_sz;
         }
     }
 
@@ -662,21 +662,21 @@ bh_elf_find_import_func_addr_by_symbol_name_unsafe(bh_elf_t *self, const char *s
             continue;
         }
 
-        addr_array[addr_array_sz++] = (void *) (self->load_bias + rel->r_offset);
-        if (addr_array_sz >= addr_array_cap) {
-            return addr_array_sz;
+        address_array[address_array_sz++] = (void *) (self->load_bias + rel->r_offset);
+        if (address_array_sz >= address_array_cap) {
+            return address_array_sz;
         }
     }
 
     if (NULL != self->rel_dyn_aps2) {
         bh_sleb128_decoder_t decoder;
         bh_sleb128_decoder_init(&decoder, self->rel_dyn_aps2, self->rel_dyn_aps2_sz);
-        void *pkg[5] = {self, sym, (void *) addr_array, (void *) addr_array_cap, &addr_array_sz};
+        void *pkg[5] = {self, sym, (void *) address_array, (void *) address_array_cap, &address_array_sz};
         bh_elf_iterate_aps2(&decoder, bh_elf_find_import_func_addr_by_symbol_name_unsafe_aps2_cb,
                             pkg);
     }
 
-    return addr_array_sz;
+    return address_array_sz;
 }
 
 size_t bh_elf_find_import_func_address_by_symbol_name(bh_elf_t *self, const char *sym_name,
