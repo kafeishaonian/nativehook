@@ -17,8 +17,6 @@ X
 (plthook/src/main/cpp/bh_linker_mutex.cpp,a/a/aaf55b1c0c135a8df677e5ee089a57d2e02207e0
 R
 "plthook/src/main/cpp/bh_recorder.h,0/2/02a4ad7238f8875d72eecde1db17777f3c49cb13
-V
-&plthook/src/main/cpp/bh_linker_mutex.h,d/7/d7218eaf85de72b02cb3bc272281c710dbc490bc
 T
 $plthook/src/main/cpp/bh_recorder.cpp,2/0/205e00df188ae6c4d23150cce7118d9ed4b422fb
 S
@@ -28,29 +26,11 @@ Q
 R
 "plthook/src/main/cpp/bh_trampo.cpp,3/8/38ef2af6dbe42624b424478264ccfbaa9d719932
 P
- plthook/src/main/cpp/bh_trampo.h,5/a/5a2045d2f8461fd7536d4bd4a6c5d3982f857b07
-P
  plthook/src/main/cpp/bh_linker.h,c/2/c2fbfc3f11626da2e9be3d71e068b6c52e089596
 R
 "plthook/src/main/cpp/bh_linker.cpp,f/e/fe8f962d0a99b254fcf0b5a6c5606eac4e713d7d
-O
-plthook/src/main/cpp/bh_cfi.cpp,9/d/9dc3769b9589f3da2ff36a04ef81a0f6392a216d
-O
-plthook/src/main/cpp/bh_const.h,2/f/2fee577aab4f94f62bbb7f4b16ff79ef96af96e0
-N
-plthook/src/main/cpp/bh_dl.cpp,c/6/c631ca3c69942962ee64957c9a399e8d76404c76
-L
-plthook/src/main/cpp/bh_dl.h,d/7/d79a5b83a265c82341db31c96ce325c8850b9613
-V
-&plthook/src/main/cpp/bh_dl_iterate.cpp,c/f/cfeec19f05febbafe9195c1ee6a25a8fbd2c0790
-T
-$plthook/src/main/cpp/bh_dl_iterate.h,2/b/2b47387dda894c50aa2756507e52bc8dfc432a5e
-M
-plthook/src/main/cpp/bh_cfi.h,9/e/9e608f007b6ad992fe64defdcefd5a67f4879002
 M
 plthook/src/main/cpp/bh_elf.h,6/3/638fa37a59a1a252ebd9f40d25361761af8bbbf2
-O
-plthook/src/main/cpp/bh_elf.cpp,0/a/0aaec3263467fc81155e4ac65cfc527248c5e8ab
 U
 %plthook/src/main/cpp/bh_elf_manager.h,4/8/48e39b59e5988f5d876b71a838c8f7ce72097387
 W
@@ -65,5 +45,3 @@ P
  plthook/src/main/cpp/bh_hook.cpp,b/9/b9692bb426306bff3c283282e355d94d4ebe6bfa
 N
 plthook/src/main/cpp/bh_hook.h,4/9/4962009932d93121eede0e7268c5c39a436ae8d0
-S
-#plthook/src/main/cpp/CMakeLists.txt,e/a/ea5a02ad0ef87684645efaddfad2dbac77b25582
