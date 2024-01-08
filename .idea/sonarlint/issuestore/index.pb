@@ -35,13 +35,37 @@ U
 %plthook/src/main/cpp/bh_elf_manager.h,4/8/48e39b59e5988f5d876b71a838c8f7ce72097387
 W
 'plthook/src/main/cpp/bh_elf_manager.cpp,7/d/7d8d521c658b0a0bb73dd61e1a272309ddb1bd3a
-V
-&plthook/src/main/cpp/include/plthook.h,b/8/b82d8f73ad3e208d86cf956946ae83c0912f56bb
 P
  plthook/src/main/cpp/plthook.cpp,d/e/de4430fe0cd9f06596fec9dea443aac7c0d4b3ce
-\
-,plthook/src/main/cpp/third_party/bsd/queue.h,6/7/679f806c3d7fca4c3c581fc50e1a2f5fe8f9aeeb
 P
  plthook/src/main/cpp/bh_hook.cpp,b/9/b9692bb426306bff3c283282e355d94d4ebe6bfa
 N
 plthook/src/main/cpp/bh_hook.h,4/9/4962009932d93121eede0e7268c5c39a436ae8d0
+P
+ plthook/src/main/cpp/bh_task.cpp,9/1/9149da54adc07a1503597c229b7f2b8843c26505
+X
+(plthook/src/main/cpp/bh_hook_manager.cpp,3/8/38708321aa3f06e4b292e9e86f9ad46d5f3fb78d
+X
+(plthook/src/main/cpp/bh_task_manager.cpp,7/c/7c5f32790caccaf9c4db209ae0d52c4e6f913bae
+V
+&plthook/src/main/cpp/bh_task_manager.h,a/9/a9e2c0a55d949b5be647363eca52e2f5c7ba0a87
+N
+plthook/src/main/cpp/bh_task.h,1/3/1318ea0b5c39bdc5741076ad5ffd97d4d88e12b0
+V
+&plthook/src/main/cpp/bh_hook_manager.h,a/7/a7ed92856f5150526489497f2628f528dc846364
+V
+&plthook/src/main/cpp/bh_linker_mutex.h,d/7/d7218eaf85de72b02cb3bc272281c710dbc490bc
+V
+&plthook/src/main/cpp/bh_trampo_x86.cpp,4/3/436a4967f961d15594c80cfd3d526f64c648aa8b
+Y
+)plthook/src/main/cpp/bh_trampo_x86_64.cpp,7/2/72cf99df954c2b144b9386d5de2833280c956ad4
+S
+#plthook/src/main/cpp/CMakeLists.txt,e/a/ea5a02ad0ef87684645efaddfad2dbac77b25582
+O
+plthook/src/main/cpp/bh_cfi.cpp,9/d/9dc3769b9589f3da2ff36a04ef81a0f6392a216d
+M
+plthook/src/main/cpp/bh_cfi.h,9/e/9e608f007b6ad992fe64defdcefd5a67f4879002
+O
+plthook/src/main/cpp/bh_const.h,2/f/2fee577aab4f94f62bbb7f4b16ff79ef96af96e0
+P
+ plthook/src/main/cpp/bh_trampo.h,5/a/5a2045d2f8461fd7536d4bd4a6c5d3982f857b07

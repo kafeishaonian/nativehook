@@ -99,3 +99,104 @@ typedef TAILQ_HEAD(bh_dl_monitor_cb_queue, bh_dl_monitor_cb, ) bh_dl_monitor_cb_
 static bh_dl_monitor_cb_queue_t bh_dl_monitor_cbs = TAILQ_HEAD_INITIALIZER(bh_dl_monitor_cbs);
 static pthread_rwlock_t bh_dl_monitor_cbs_lock = PTHREAD_RWLOCK_INITIALIZER;
 
+
+static void bh_dl_monitor_call_cb_pre(const char *filename) {
+    if (TAILQ_EMPTY(&bh_dl_monitor_cbs)) {
+        return;
+    }
+
+    pthread_rwlock_rdlock(&bh_dl_monitor_cbs_lock);
+    bh_dl_monitor_cb_t *cb;
+    TAILQ_FOREACH(cb, &bh_dl_monitor_cbs, link) {
+        if (NULL != cb->pre) {
+            cb->pre(filename, cb->data);
+        }
+    }
+    pthread_rwlock_unlock(&bh_dl_monitor_cbs_lock);
+}
+
+
+static void bh_dl_monitor_call_cb_post(const char *filename, int result) {
+    if (TAILQ_EMPTY(&bh_dl_monitor_cbs)) {
+        return;
+    }
+
+    pthread_rwlock_rdlock(&bh_dl_monitor_cbs_lock);
+    bh_dl_monitor_cb_t *cb;
+    TAILQ_FOREACH(cb, &bh_dl_monitor_cbs, link) {
+        if (NULL != cb->post) {
+            cb->post(filename, result, cb->data);
+        }
+    }
+    pthread_rwlock_unlock(&bh_dl_monitor_cbs_lock);
+}
+
+
+// callback for hooking dlopen()
+static void bh_dl_monitor_proxy_dlopen_hooked(plt_hook_stub_t task_stub, int status_code,
+                                              const char *caller_path_name, const char *sym_name,
+                                              void *new_func, void *prev_func, void *arg) {
+
+    (void)task_stub, (void)caller_path_name, (void)sym_name, (void)new_func, (void)arg;
+    if (PLT_HOOK_STATUS_CODE_ORIG_ADDR == status_code && (void *)bh_dl_monitor_orig_dlopen != prev_func) {
+        bh_dl_monitor_orig_dlopen = (bh_dl_monitor_dlopen_t)prev_func;
+    }
+}
+
+// callback for hooking android_dlopen_ext()
+static void bh_dl_monitor_proxy_android_dlopen_ext_hooked(plt_hook_stub_t task_stub, int status_code,
+                                                          const char *caller_path_name, const char *sym_name,
+                                                          void *new_func, void *prev_func, void *arg) {
+
+    (void)task_stub, (void)caller_path_name, (void)sym_name, (void)new_func, (void)arg;
+    if (PLT_HOOK_STATUS_CODE_ORIG_ADDR == status_code && (void *)bh_dl_monitor_orig_android_dlopen_ext != prev_func) {
+        bh_dl_monitor_orig_android_dlopen_ext = (bh_dl_monitor_android_dlopen_ext_t)prev_func;
+    }
+}
+
+
+// callback for hooking __loader_dlopen()
+static void bh_dl_monitor_proxy_loader_dlopen_hooked(plt_hook_stub_t task_stub, int status_code,
+                                                     const char *caller_path_name, const char *sym_name,
+                                                     void *new_func, void *prev_func, void *arg) {
+
+    (void)task_stub, (void)caller_path_name, (void)sym_name, (void)new_func, (void)arg;
+    if (PLT_HOOK_STATUS_CODE_ORIG_ADDR == status_code && (void *)bh_dl_monitor_orig_loader_dlopen != prev_func) {
+        bh_dl_monitor_orig_loader_dlopen = (bh_dl_monitor_loader_dlopen_t)prev_func;
+    }
+}
+
+// callback for hooking __loader_android_dlopen_ext()
+static void bh_dl_monitor_proxy_loader_android_dlopen_ext_hooked(plt_hook_stub_t task_stub, int status_code,
+                                                                 const char *caller_path_name,
+                                                                 const char *sym_name, void *new_func,
+                                                                 void *prev_func, void *arg) {
+
+    (void)task_stub, (void)caller_path_name, (void)sym_name, (void)new_func, (void)arg;
+    if (PLT_HOOK_STATUS_CODE_ORIG_ADDR == status_code && (void *) bh_dl_monitor_orig_loader_android_dlopen_ext != prev_func) {
+        bh_dl_monitor_orig_loader_android_dlopen_ext = (bh_dl_monitor_loader_android_dlopen_ext_t)prev_func;
+    }
+}
+
+// callback for hooking dlclose()
+static void bh_dl_monitor_proxy_dlclose_hooked(plt_hook_stub_t task_stub, int status_code,
+                                               const char *caller_path_name, const char *sym_name,
+                                               void *new_func, void *prev_func, void *arg) {
+
+    (void) task_stub, (void) caller_path_name, (void) sym_name, (void) new_func, (void) arg;
+    if (PLT_HOOK_STATUS_CODE_ORIG_ADDR == status_code && (void *) bh_dl_monitor_orig_dlclose != prev_func) {
+        bh_dl_monitor_orig_dlclose = (bh_dl_monitor_dlclose_t)prev_func;
+    }
+}
+
+// callback for hooking __loader_dlclose()
+static void bh_dl_monitor_proxy_loader_dlclose_hooked(plt_hook_stub_t task_stub, int status_code,
+                                                      const char *caller_path_name, const char *sym_name,
+                                                      void *new_func, void *prev_func, void *arg) {
+
+    (void) task_stub, (void) caller_path_name, (void) sym_name, (void) new_func, (void) arg;
+    if (PLT_HOOK_STATUS_CODE_ORIG_ADDR == status_code && (void *)bh_dl_monitor_orig_loader_dlclose != prev_func) {
+        bh_dl_monitor_orig_loader_dlclose = (bh_dl_monitor_loader_dlclose_t)prev_func;
+    }
+}
+
