@@ -60,7 +60,8 @@ int bh_cfi_disable_slowpath(void) {
 
     BYTESIG_EXIT
 
-    __builtin___clear_cache(start, (void *)((size_t)end + sizeof(uint32_t)));
+    __builtin___clear_cache(static_cast<char *>(start),
+                            static_cast<char *>((void *) ((size_t) end + sizeof(uint32_t))));
 
     return 0;
 }

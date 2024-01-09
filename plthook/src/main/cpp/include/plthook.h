@@ -95,6 +95,7 @@ extern "C" {
     void *plt_hook_get_prev_func(void *func);
 
     void plt_hook_pop_stack(void *return_address);
+    void *plt_hook_get_return_address(void);
 
     typedef void (*plt_hook_pre_dlopen_t)(const char *filename, void *data);
 
@@ -108,11 +109,11 @@ extern "C" {
 };
 #endif
 
-#ifdef __cplusplus
-#define PLT_HOOK_CALL_PREV(func, ...)((decltype(&(func)))plt_hook_get_prev_func((void *)(func)))(__VA_ARGS__)
-#else
+//#ifdef __cplusplus
+//#define PLT_HOOK_CALL_PREV(func, ...)((decltype(&(func)))plt_hook_get_prev_func((void *)(func)))(__VA_ARGS__)
+//#else
 #define PLT_HOOK_CALL_PREV(func, func_sig, ...)((func_sig)plt_hook_get_prev_func((void *)(func)))(__VA_ARGS__)
-#endif
+//#endif
 
 #define PLT_HOOK_RETURN_ADDRESS() ((void *)(PLT_HOOK_MODE_AUTOMATIC == plt_hook_get_mode() ? plt_hook_get_return_address() : __builtin_return_address(0)))
 
