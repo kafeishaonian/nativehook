@@ -568,26 +568,129 @@ bool bh_dl_monitor_is_initing(void) {
 }
 
 int bh_dl_monitor_init(void) {
+    static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+    static bool inited = false;
+    static bool inited_ok = false;
 
+    if (inited) {
+        return inited_ok ? 0 : -1;
+    }
+
+    int r;
+    pthread_mutex_lock(&lock);
+    bh_dl_monitor_initing = true;
+    if (!inited) {
+        __atomic_store_n(&inited, true, __ATOMIC_SEQ_CST);
+        BH_LOG_INFO("DL monitor: pre init");
+        if (0 == (r = bh_dl_monitor_hook())) {
+            __atomic_store_n(&inited_ok, true, __ATOMIC_SEQ_CST);
+            BH_LOG_INFO("DL monitor: post init, OK");
+        } else {
+            BH_LOG_ERROR("DL monitor: post init, FAILED");
+        }
+    } else {
+        r = inited_ok ? 0 : -1;
+    }
+    bh_dl_monitor_initing = false;
+    pthread_mutex_unlock(&lock);
+    return r;
 }
 
 void bh_dl_monitor_uninit(void) {
+    if (NULL != bh_dl_monitor_stub_dlopen) {
+        bh_core_unhook(bh_dl_monitor_stub_dlopen, 0);
+        bh_dl_monitor_stub_dlopen = NULL;
+    }
 
+    if (NULL != bh_dl_monitor_stub_android_dlopen_ext) {
+        bh_core_unhook(bh_dl_monitor_stub_android_dlopen_ext, 0);
+        bh_dl_monitor_stub_android_dlopen_ext = NULL;
+    }
+
+    if (NULL != bh_dl_monitor_stub_loader_dlopen) {
+        bh_core_unhook(bh_dl_monitor_stub_loader_dlopen, 0);
+        bh_dl_monitor_stub_loader_dlopen = NULL;
+    }
+
+    if (NULL != bh_dl_monitor_stub_loader_android_dlopen_ext) {
+        bh_core_unhook(bh_dl_monitor_stub_loader_android_dlopen_ext, 0);
+        bh_dl_monitor_stub_loader_android_dlopen_ext = NULL;
+    }
+
+    if (NULL != bh_dl_monitor_stub_dlclose) {
+        bh_core_unhook(bh_dl_monitor_stub_dlclose, 0);
+        bh_dl_monitor_stub_dlclose = NULL;
+    }
+
+    if (NULL != bh_dl_monitor_stub_loader_dlclose) {
+        bh_core_unhook(bh_dl_monitor_stub_loader_dlclose, 0);
+        bh_dl_monitor_stub_loader_dlclose = NULL;
+    }
 }
 
 void bh_dl_monitor_set_post_dlopen(bh_dl_monitor_post_dlopen_t cb, void *cb_arg) {
-
+    bh_dl_monitor_post_dlopen_arg = cb_arg;
+    __atomic_store_n(&bh_dl_monitor_post_dlopen, cb, __ATOMIC_SEQ_CST);
 }
 
 void bh_dl_monitor_set_post_dlclose(bh_dl_monitor_post_dlclose_t cb, void *cb_arg) {
-
+    bh_dl_monitor_post_dlclose_arg = cb_arg;
+    __atomic_store_n(&bh_dl_monitor_post_dlclose, cb, __ATOMIC_SEQ_CST);
 }
 
 void bh_dl_monitor_add_dlopen_callback(plt_hook_pre_dlopen_t pre, plt_hook_post_dlopen_t post, void *data) {
+    if (NULL == pre && NULL == post) {
+        return;
+    }
 
+    bh_dl_monitor_cb_t *cb_new = static_cast<bh_dl_monitor_cb_t *>(malloc(
+            sizeof(bh_dl_monitor_cb_t)));
+    if (NULL == cb_new) {
+        return;
+    }
+    cb_new->pre = pre;
+    cb_new->post = post;
+    cb_new->data = data;
+
+    bh_dl_monitor_init();
+
+    bh_dl_monitor_cb_t *cb = NULL;
+    pthread_rwlock_wrlock(&bh_dl_monitor_cbs_lock);
+    TAILQ_FOREACH(cb, &bh_dl_monitor_cbs, link) {
+        if (cb->pre == pre && cb->post == post && cb->data == data) {
+            break;
+        }
+    }
+    if (NULL == cb) {
+        TAILQ_INSERT_TAIL(&bh_dl_monitor_cbs, cb_new, link);
+        cb_new = NULL;
+    }
+
+    pthread_rwlock_unlock(&bh_dl_monitor_cbs_lock);
+
+    if (NULL != cb_new) {
+        free(cb_new);
+    }
 }
 
 void bh_dl_monitor_delete_dlopen_callback(plt_hook_pre_dlopen_t pre, plt_hook_post_dlopen_t post, void *data) {
+    if (NULL == pre && NULL == post) {
+        return;
+    }
 
+    bh_dl_monitor_cb_t *cb = NULL, *cb_tmp;
+    pthread_rwlock_wrlock(&bh_dl_monitor_cbs_lock);
+    TAILQ_FOREACH_SAFE(cb, &bh_dl_monitor_cbs, link, cb_tmp) {
+        if (cb->pre == pre && cb->post == post && cb->data == data) {
+            TAILQ_REMOVE(&bh_dl_monitor_cbs, cb, link);
+            break;
+        }
+    }
+
+    pthread_rwlock_unlock(&bh_dl_monitor_cbs_lock);
+
+    if (NULL != cb) {
+        free(cb);
+    }
 }
 
