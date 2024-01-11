@@ -85,8 +85,6 @@ W
 'plthook/src/main/cpp/bh_elf_manager.cpp,7/d/7d8d521c658b0a0bb73dd61e1a272309ddb1bd3a
 V
 &plthook/src/main/cpp/bh_hook_manager.h,a/7/a7ed92856f5150526489497f2628f528dc846364
-T
-$plthook/src/main/cpp/plthook_jni.cpp,a/d/ad4e50a2e4b324100f1bcf413e5aa87c507f6d48
 N
 plthook/src/main/cpp/bh_hook.h,4/9/4962009932d93121eede0e7268c5c39a436ae8d0
 [
@@ -96,10 +94,10 @@ P
 N
 plthook/src/main/cpp/bh_task.h,1/3/1318ea0b5c39bdc5741076ad5ffd97d4d88e12b0
 O
-plthook/src/main/cpp/bh_elf.cpp,0/a/0aaec3263467fc81155e4ac65cfc527248c5e8ab
-O
 plthook/src/main/cpp/bh_cfi.cpp,9/d/9dc3769b9589f3da2ff36a04ef81a0f6392a216d
 X
 (plthook/src/main/cpp/bh_hook_manager.cpp,3/8/38708321aa3f06e4b292e9e86f9ad46d5f3fb78d
 M
 plthook/src/main/cpp/bh_elf.h,6/3/638fa37a59a1a252ebd9f40d25361761af8bbbf2
+V
+&plthook/src/main/cpp/bh_dl_monitor.cpp,b/b/bbe49ce0950b004f9f7add1c398746e9d79c0290

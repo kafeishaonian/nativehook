@@ -63,9 +63,8 @@
 #define RELOCATION_GROUP_HAS_ADDEND_FLAG ((size_t)8)
 
 
-static void
-bh_elf_iterate_aps2(bh_sleb128_decoder_t *decoder, bool (*callback)(Elf_Reloc *, void *),
-                    void *arg) {
+static void bh_elf_iterate_aps2(bh_sleb128_decoder_t *decoder,
+                                bool (*callback)(Elf_Reloc *, void *), void *arg) {
     size_t num_relocs;
     if (0 != bh_sleb128_decoder_next(decoder, &num_relocs)) {
         return;
@@ -495,8 +494,8 @@ static ElfW(Sym) *bh_elf_find_symbol_by_name_use_gnu_hash(bh_elf_t *self, const 
 }
 
 
-static ElfW(Sym) *
-bh_elf_find_symbol_by_name_use_import_table(bh_elf_t *self, const char *sym_name) {
+static ElfW(Sym) *bh_elf_find_symbol_by_name_use_import_table(bh_elf_t *self,
+                                                              const char *sym_name) {
     for (size_t i = 0; i < self->gnu_hash.symoffset; i++) {
         ElfW(Sym) *sym = self->dynsym + i;
         unsigned char type = ELF_ST_TYPE(sym->st_info);
@@ -512,8 +511,8 @@ bh_elf_find_symbol_by_name_use_import_table(bh_elf_t *self, const char *sym_name
     return NULL;
 }
 
-static ElfW(Sym) *
-bh_elf_find_import_func_symbol_by_symbol_name(bh_elf_t *self, const char *sym_name) {
+static ElfW(Sym) *bh_elf_find_import_func_symbol_by_symbol_name(bh_elf_t *self,
+                                                                const char *sym_name) {
     ElfW(Sym) *sym;
 
     // from SYSV hash (.hash -> .dynsym -> .dynstr), O(x) + O(1) + O(1)
@@ -562,8 +561,8 @@ bh_elf_find_import_func_symbol_by_symbol_name(bh_elf_t *self, const char *sym_na
     return NULL;
 }
 
-static ElfW(Sym) *
-bh_elf_find_export_func_symbol_by_symbol_name_unsafe(bh_elf_t *self, const char *sym_name) {
+static ElfW(Sym) *bh_elf_find_export_func_symbol_by_symbol_name_unsafe(bh_elf_t *self,
+                                                                       const char *sym_name) {
     ElfW(Sym) *sym = NULL;
 
     // from GNU hash (.gnu.hash -> .dynsym -> .dynstr), O(x) + O(1) + O(1)
@@ -627,9 +626,10 @@ static bool bh_elf_find_import_func_addr_by_symbol_name_unsafe_aps2_cb(Elf_Reloc
     return *address_array_sz < address_array_cap;
 }
 
-static size_t
-bh_elf_find_import_func_addr_by_symbol_name_unsafe(bh_elf_t *self, const char *sym_name,
-                                                   void **address_array, size_t address_array_cap) {
+static size_t bh_elf_find_import_func_addr_by_symbol_name_unsafe(bh_elf_t *self,
+                                                                 const char *sym_name,
+                                                                 void **address_array,
+                                                                 size_t address_array_cap) {
     size_t address_array_sz = 0;
 
     ElfW(Sym) *sym = bh_elf_find_import_func_symbol_by_symbol_name(self, sym_name);
@@ -671,7 +671,8 @@ bh_elf_find_import_func_addr_by_symbol_name_unsafe(bh_elf_t *self, const char *s
     if (NULL != self->rel_dyn_aps2) {
         bh_sleb128_decoder_t decoder;
         bh_sleb128_decoder_init(&decoder, self->rel_dyn_aps2, self->rel_dyn_aps2_sz);
-        void *pkg[5] = {self, sym, (void *) address_array, (void *) address_array_cap, &address_array_sz};
+        void *pkg[5] = {self, sym, (void *) address_array, (void *) address_array_cap,
+                        &address_array_sz};
         bh_elf_iterate_aps2(&decoder, bh_elf_find_import_func_addr_by_symbol_name_unsafe_aps2_cb,
                             pkg);
     }
@@ -708,8 +709,8 @@ size_t bh_elf_find_import_func_address_by_symbol_name(bh_elf_t *self, const char
     return address_array_sz;
 }
 
-static bool
-bh_elf_find_import_func_address_by_callee_address_unsafe_aps2_cb(Elf_Reloc *rel, void *arg) {
+static bool bh_elf_find_import_func_address_by_callee_address_unsafe_aps2_cb(Elf_Reloc *rel,
+                                                                             void *arg) {
     void **pkg = (void **) arg;
     bh_elf_t *self = (bh_elf_t *) *pkg++;
     void *target_address = *pkg++;
@@ -729,10 +730,10 @@ bh_elf_find_import_func_address_by_callee_address_unsafe_aps2_cb(Elf_Reloc *rel,
     return *address_array_sz < address_array_cap;
 }
 
-static size_t
-bh_elf_find_import_func_address_by_callee_address_unsafe(bh_elf_t *self, void *target_address,
-                                                         void **address_array,
-                                                         size_t address_array_cap) {
+static size_t bh_elf_find_import_func_address_by_callee_address_unsafe(bh_elf_t *self,
+                                                                       void *target_address,
+                                                                       void **address_array,
+                                                                       size_t address_array_cap) {
     size_t address_array_sz = 0;
 
     for (size_t i = 0; i < self->rel_plt_cnt; i++) {
@@ -806,8 +807,8 @@ size_t bh_elf_find_import_func_address_by_callee_address(bh_elf_t *self, void *t
     return address_array_sz;
 }
 
-static void *
-bh_elf_find_export_func_address_by_symbol_name_unsafe(bh_elf_t *self, const char *sym_name) {
+static void *bh_elf_find_export_func_address_by_symbol_name_unsafe(bh_elf_t *self,
+                                                                   const char *sym_name) {
     ElfW(Sym) *sym = bh_elf_find_export_func_symbol_by_symbol_name_unsafe(self, sym_name);
     if (NULL == sym) {
         return NULL;

@@ -30,7 +30,7 @@ static jint bh_jni_add_ignore(JNIEnv *env, jclass interface, jstring caller_path
         goto clean;
     }
 
-//    r = plt_hook_add_ignore(c_caller_path_name);
+    r = plt_hook_add_ignore(c_caller_path_name);
 
     clean:
     if (caller_path_name && c_caller_path_name) {
@@ -43,43 +43,39 @@ static jint bh_jni_get_mode(JNIEnv *env, jclass interface) {
     (void) env;
     (void) interface;
 
-//    return PLT_HOOK_MODE_AUTOMATIC == plt_hook_get_mode() ? 0 : 1;
-    return 1;
+    return PLT_HOOK_MODE_AUTOMATIC == plt_hook_get_mode() ? 0 : 1;
 }
 static jboolean bh_jni_get_debug(JNIEnv *env, jclass interface) {
     (void) env;
     (void) interface;
 
-//    return plt_hook_get_debug();
-    return false;
+    return plt_hook_get_debug();
 }
 static void bh_jni_set_debug(JNIEnv *env, jclass interface, jboolean debug) {
     (void) env;
     (void) interface;
 
-//    plt_hook_set_debug(debug);
+    plt_hook_set_debug(debug);
 }
 
 static jboolean bh_jni_get_recordable(JNIEnv *env, jclass interface) {
     (void) env;
     (void) interface;
 
-//    return plt_hook_get_recordable();
-    return false;
+    return plt_hook_get_recordable();
 }
 
 static void bh_jni_set_recordable(JNIEnv *env, jclass interface, jboolean recordable) {
     (void) env;
     (void) interface;
 
-//    plt_hook_set_recordable(recordable);
+    plt_hook_set_recordable(recordable);
 }
 
 static jstring bh_jni_get_records(JNIEnv *env, jclass interface, jint item_flags) {
     (void) interface;
 
-//    char *str = plt_hook_get_records(item_flags);
-    char *str;
+    char *str = plt_hook_get_records(item_flags);
     if (NULL == str) {
         return NULL;
     }
