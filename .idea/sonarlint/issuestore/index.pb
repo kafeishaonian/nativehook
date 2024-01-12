@@ -81,8 +81,6 @@ O
 ,plthook/src/main/cpp/third_party/bsd/queue.h,6/7/679f806c3d7fca4c3c581fc50e1a2f5fe8f9aeeb
 U
 %plthook/src/main/cpp/bh_elf_manager.h,4/8/48e39b59e5988f5d876b71a838c8f7ce72097387
-W
-'plthook/src/main/cpp/bh_elf_manager.cpp,7/d/7d8d521c658b0a0bb73dd61e1a272309ddb1bd3a
 V
 &plthook/src/main/cpp/bh_hook_manager.h,a/7/a7ed92856f5150526489497f2628f528dc846364
 N
@@ -101,3 +99,7 @@ M
 plthook/src/main/cpp/bh_elf.h,6/3/638fa37a59a1a252ebd9f40d25361761af8bbbf2
 V
 &plthook/src/main/cpp/bh_dl_monitor.cpp,b/b/bbe49ce0950b004f9f7add1c398746e9d79c0290
+T
+$plthook/src/main/cpp/plthook_jni.cpp,a/d/ad4e50a2e4b324100f1bcf413e5aa87c507f6d48
+O
+plthook/src/main/cpp/bh_elf.cpp,0/a/0aaec3263467fc81155e4ac65cfc527248c5e8ab
