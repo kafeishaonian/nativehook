@@ -7,7 +7,7 @@
 
 #include "bh_hook.h"
 
-extern void *bh_reampo_data;
+extern void *bh_trampo_data;
 
 void bh_trampo_template(void);
 

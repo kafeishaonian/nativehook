@@ -15,10 +15,6 @@ V
 ,plthook/src/main/cpp/third_party/bsd/queue.h,6/7/679f806c3d7fca4c3c581fc50e1a2f5fe8f9aeeb
 [
 +plthook/src/main/cpp/third_party/bsd/tree.h,c/2/c2ad0a578c39b513ed33c759167ab3530a2ca500
-R
-"plthook/src/main/cpp/bh_trampo.cpp,3/8/38ef2af6dbe42624b424478264ccfbaa9d719932
-P
- plthook/src/main/cpp/bh_trampo.h,5/a/5a2045d2f8461fd7536d4bd4a6c5d3982f857b07
 V
 &plthook/src/main/cpp/bh_trampo_arm.cpp,f/e/fe992a99254cb14d9973a77bfe268cd230686a7f
 X
@@ -101,3 +97,5 @@ N
 plthook/src/main/cpp/bh_task.h,1/3/1318ea0b5c39bdc5741076ad5ffd97d4d88e12b0
 X
 (plthook/src/main/cpp/bh_task_manager.cpp,7/c/7c5f32790caccaf9c4db209ae0d52c4e6f913bae
+P
+ plthook/src/main/cpp/bh_task.cpp,9/1/9149da54adc07a1503597c229b7f2b8843c26505
