@@ -99,3 +99,7 @@ X
 (plthook/src/main/cpp/bh_task_manager.cpp,7/c/7c5f32790caccaf9c4db209ae0d52c4e6f913bae
 P
  plthook/src/main/cpp/bh_task.cpp,9/1/9149da54adc07a1503597c229b7f2b8843c26505
+R
+"plthook/src/main/cpp/bh_trampo.cpp,3/8/38ef2af6dbe42624b424478264ccfbaa9d719932
+P
+ plthook/src/main/cpp/bh_trampo.h,5/a/5a2045d2f8461fd7536d4bd4a6c5d3982f857b07
