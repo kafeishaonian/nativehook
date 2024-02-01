@@ -26,8 +26,7 @@
                 android:padding="10dp">
                 <RadioButton android:id="@+id/radio_hook_single"
                     style="@style/Theme.RadioButton"
-                    android:text="hook open( ) in libhookee.so"
-                    android:onClick="onRadioButtonClicked"/>
+                    android:text="hook open( ) in libhookee.so"/>
                 <RadioButton android:id="@+id/radio_hook_partial"
                     style="@style/Theme.RadioButton"
                     android:text="hook open( ) in partial ELF"

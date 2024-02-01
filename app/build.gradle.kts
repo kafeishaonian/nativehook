@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "com.example.nativehook"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.nativehook"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -39,6 +39,9 @@ android {
             path = file("src/main/cpp/CMakeLists.txt")
             version = "3.22.1"
         }
+    }
+    packaging {
+        jniLibs.pickFirsts += "**/libplthook.so"
     }
     buildFeatures {
         viewBinding = true

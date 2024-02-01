@@ -5,10 +5,6 @@
 local.properties,0/7/0712df971a99ac4d2fccb8e0fb19f377f3374cca
 C
 settings.gradle.kts,7/4/749edfcc96398253e5b3416184e95c46621da850
-j
-:app/src/main/java/com/example/nativehook/MainActivity.java,4/c/4ce5aa4512ad7998b22173db839c72d2b5b454a8
-S
-#plthook/src/main/cpp/CMakeLists.txt,e/a/ea5a02ad0ef87684645efaddfad2dbac77b25582
 V
 &plthook/src/main/cpp/include/plthook.h,b/8/b82d8f73ad3e208d86cf956946ae83c0912f56bb
 \
