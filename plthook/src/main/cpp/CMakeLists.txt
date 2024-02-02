@@ -13,6 +13,8 @@ project("plthook")
 
 enable_language(ASM)
 
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../libs/${ANDROID_ABI}/)
+
 file(GLOB SRC
         *.cpp /include/*.h)
 # Creates and names a library, sets it as either STATIC

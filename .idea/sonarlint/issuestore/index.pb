@@ -5,20 +5,10 @@
 local.properties,0/7/0712df971a99ac4d2fccb8e0fb19f377f3374cca
 C
 settings.gradle.kts,7/4/749edfcc96398253e5b3416184e95c46621da850
-V
-&plthook/src/main/cpp/include/plthook.h,b/8/b82d8f73ad3e208d86cf956946ae83c0912f56bb
 \
 ,plthook/src/main/cpp/third_party/bsd/queue.h,6/7/679f806c3d7fca4c3c581fc50e1a2f5fe8f9aeeb
 [
 +plthook/src/main/cpp/third_party/bsd/tree.h,c/2/c2ad0a578c39b513ed33c759167ab3530a2ca500
-V
-&plthook/src/main/cpp/bh_trampo_arm.cpp,f/e/fe992a99254cb14d9973a77bfe268cd230686a7f
-X
-(plthook/src/main/cpp/bh_trampo_arm64.cpp,9/f/9fae64d2a89c5bb72f85857a53ad9fd663c9112b
-V
-&plthook/src/main/cpp/bh_trampo_x86.cpp,4/3/436a4967f961d15594c80cfd3d526f64c648aa8b
-Y
-)plthook/src/main/cpp/bh_trampo_x86_64.cpp,7/2/72cf99df954c2b144b9386d5de2833280c956ad4
 P
  plthook/src/main/cpp/bh_util.cpp,5/1/51eda040c8fbe18f026feed9584d90dbe82cbd8c
 N
@@ -29,8 +19,6 @@ N
 plthook/src/main/cpp/bytesig.h,4/a/4aab1d00beae6879c58b7e828113d88cedca3d5d
 P
  plthook/src/main/cpp/plthook.cpp,d/e/de4430fe0cd9f06596fec9dea443aac7c0d4b3ce
-T
-$plthook/src/main/cpp/plthook_jni.cpp,a/d/ad4e50a2e4b324100f1bcf413e5aa87c507f6d48
 O
 plthook/src/main/cpp/bh_cfi.cpp,9/d/9dc3769b9589f3da2ff36a04ef81a0f6392a216d
 M
@@ -99,3 +87,17 @@ R
 "plthook/src/main/cpp/bh_trampo.cpp,3/8/38ef2af6dbe42624b424478264ccfbaa9d719932
 P
  plthook/src/main/cpp/bh_trampo.h,5/a/5a2045d2f8461fd7536d4bd4a6c5d3982f857b07
+V
+&plthook/src/main/cpp/bh_task_manager.h,a/9/a9e2c0a55d949b5be647363eca52e2f5c7ba0a87
+i
+9plthook/src/main/java/com/example/plthook/ILibLoader.java,c/4/c45b4fd30ed79c946f94574d83f83e9e9263f4de
+f
+6plthook/src/main/java/com/example/plthook/PLTHook.java,2/e/2e333c6308635380f79f546c9fc5732498b01917
+O
+app/src/main/cpp/native-lib.cpp,0/5/05b06ab0d5ff3a29c39bddac9c41f1011ad7a055
+q
+Aapp/src/main/java/com/example/nativehook/MyCustomApplication.java,1/9/1926c4497f64d66342b7ec453e384679a2265362
+j
+:app/src/main/java/com/example/nativehook/NativeHacker.java,b/1/b119f631327deca260d39a054921f779c34e59b0
+j
+:app/src/main/java/com/example/nativehook/NativeHookee.java,6/b/6b24e4289346d71420671e9d658aba304a8b6516
