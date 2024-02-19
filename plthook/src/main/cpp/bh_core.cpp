@@ -42,6 +42,7 @@ int bh_core_init(int mode, bool debug) {
         BH_LOG_SHOW("plt hook already init, return: %d", bh_core.init_status);
         return bh_core.init_status;
     }
+    BH_LOG_ERROR("plt hook shuju: %d", mode);
 
     static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
     pthread_mutex_lock(&lock);

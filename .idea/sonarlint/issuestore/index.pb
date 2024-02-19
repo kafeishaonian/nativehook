@@ -17,18 +17,12 @@ P
  plthook/src/main/cpp/bytesig.cpp,4/0/402a3874b9eacedd4424ea5b2317fa23a4455e89
 N
 plthook/src/main/cpp/bytesig.h,4/a/4aab1d00beae6879c58b7e828113d88cedca3d5d
-P
- plthook/src/main/cpp/plthook.cpp,d/e/de4430fe0cd9f06596fec9dea443aac7c0d4b3ce
 O
 plthook/src/main/cpp/bh_cfi.cpp,9/d/9dc3769b9589f3da2ff36a04ef81a0f6392a216d
 M
 plthook/src/main/cpp/bh_cfi.h,9/e/9e608f007b6ad992fe64defdcefd5a67f4879002
 O
 plthook/src/main/cpp/bh_const.h,2/f/2fee577aab4f94f62bbb7f4b16ff79ef96af96e0
-P
- plthook/src/main/cpp/bh_core.cpp,9/4/944cf4885f2c3234c1cd9549ca404b6aedb63c1a
-N
-plthook/src/main/cpp/bh_core.h,e/f/ef004f383f36004e1c104cd5ff28faf861e89b61
 N
 plthook/src/main/cpp/bh_dl.cpp,c/6/c631ca3c69942962ee64957c9a399e8d76404c76
 L
@@ -37,8 +31,6 @@ V
 &plthook/src/main/cpp/bh_dl_iterate.cpp,c/f/cfeec19f05febbafe9195c1ee6a25a8fbd2c0790
 T
 $plthook/src/main/cpp/bh_dl_iterate.h,2/b/2b47387dda894c50aa2756507e52bc8dfc432a5e
-V
-&plthook/src/main/cpp/bh_dl_monitor.cpp,b/b/bbe49ce0950b004f9f7add1c398746e9d79c0290
 T
 $plthook/src/main/cpp/bh_dl_monitor.h,3/a/3a2c51ea1e3baa1652dd3116d1ce2b379ed83481
 O
@@ -67,10 +59,6 @@ V
 &plthook/src/main/cpp/bh_linker_mutex.h,d/7/d7218eaf85de72b02cb3bc272281c710dbc490bc
 O
 plthook/src/main/cpp/bh_log.cpp,2/7/27d9f1c31b4a900bad7f4578147be7782658f98e
-M
-plthook/src/main/cpp/bh_log.h,4/e/4e9641ad69faf4401d07e0c97c6b244d52ddaec8
-T
-$plthook/src/main/cpp/bh_recorder.cpp,2/0/205e00df188ae6c4d23150cce7118d9ed4b422fb
 R
 "plthook/src/main/cpp/bh_recorder.h,0/2/02a4ad7238f8875d72eecde1db17777f3c49cb13
 S
@@ -91,13 +79,37 @@ V
 &plthook/src/main/cpp/bh_task_manager.h,a/9/a9e2c0a55d949b5be647363eca52e2f5c7ba0a87
 i
 9plthook/src/main/java/com/example/plthook/ILibLoader.java,c/4/c45b4fd30ed79c946f94574d83f83e9e9263f4de
-f
-6plthook/src/main/java/com/example/plthook/PLTHook.java,2/e/2e333c6308635380f79f546c9fc5732498b01917
 O
 app/src/main/cpp/native-lib.cpp,0/5/05b06ab0d5ff3a29c39bddac9c41f1011ad7a055
-q
-Aapp/src/main/java/com/example/nativehook/MyCustomApplication.java,1/9/1926c4497f64d66342b7ec453e384679a2265362
-j
-:app/src/main/java/com/example/nativehook/NativeHacker.java,b/1/b119f631327deca260d39a054921f779c34e59b0
 j
 :app/src/main/java/com/example/nativehook/NativeHookee.java,6/b/6b24e4289346d71420671e9d658aba304a8b6516
+X
+(plthook/src/main/cpp/bh_trampo_arm64.cpp,9/f/9fae64d2a89c5bb72f85857a53ad9fd663c9112b
+V
+&plthook/src/main/cpp/bh_trampo_arm.cpp,f/e/fe992a99254cb14d9973a77bfe268cd230686a7f
+Y
+)plthook/src/main/cpp/bh_trampo_x86_64.cpp,7/2/72cf99df954c2b144b9386d5de2833280c956ad4
+V
+&plthook/src/main/cpp/bh_trampo_x86.cpp,4/3/436a4967f961d15594c80cfd3d526f64c648aa8b
+H
+plthook/build.gradle.kts,4/2/424b3f6915a1935999f1dd978adac307d067ca15
+N
+plthook/src/main/cpp/bh_core.h,e/f/ef004f383f36004e1c104cd5ff28faf861e89b61
+V
+&plthook/src/main/cpp/include/plthook.h,b/8/b82d8f73ad3e208d86cf956946ae83c0912f56bb
+V
+&plthook/src/main/cpp/bh_dl_monitor.cpp,b/b/bbe49ce0950b004f9f7add1c398746e9d79c0290
+S
+#plthook/src/main/cpp/CMakeLists.txt,e/a/ea5a02ad0ef87684645efaddfad2dbac77b25582
+q
+Aapp/src/main/java/com/example/nativehook/MyCustomApplication.java,1/9/1926c4497f64d66342b7ec453e384679a2265362
+f
+6plthook/src/main/java/com/example/plthook/PLTHook.java,2/e/2e333c6308635380f79f546c9fc5732498b01917
+T
+$plthook/src/main/cpp/plthook_jni.cpp,a/d/ad4e50a2e4b324100f1bcf413e5aa87c507f6d48
+M
+plthook/src/main/cpp/bh_log.h,4/e/4e9641ad69faf4401d07e0c97c6b244d52ddaec8
+j
+:app/src/main/java/com/example/nativehook/NativeHacker.java,b/1/b119f631327deca260d39a054921f779c34e59b0
+D
+app/build.gradle.kts,d/2/d2a4383452aad84a18429a5844d31330a012a9e6

@@ -10,8 +10,21 @@ cmake_minimum_required(VERSION 3.22.1)
 # with ${CMAKE_PROJECT_NAME} (both CMake variables are in-sync within the top level
 # build script scope).
 project("nativehook")
-set(plthook "../../../../plthook/src/main/cpp/CMakeLists.txt")
-find_package(plthook REQUIRED CONFIG)
+
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../libs/${ANDROID_ABI}/)
+
+set(LIBPLT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/../../../../plthook/src/main/cpp/include)
+include_directories(${LIBPLT_INCLUDE_DIR})
+set(LIBPLT_DIR ${PROJECT_SOURCE_DIR}/../../../../plthook/src/main/cpp)
+include_directories(${LIBPLT_DIR})
+
+set(SRC_FILE ${PROJECT_SOURCE_DIR}/../../../../plthook/src/main/libs/${ANDROID_ABI})
+include_directories(${SRC_FILE})
+
+#add_library(plthook SHARED ${SRC_FILE})
+add_library(plthook SHARED IMPORTED)
+set_target_properties(plthook PROPERTIES IMPORTED_LOCATION ${SRC_FILE}/libplthook.so)
+set_target_properties(plthook PROPERTIES LINKER_LANGUAGE CXX)
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
@@ -39,13 +52,13 @@ find_package(plthook REQUIRED CONFIG)
 #        log)
 
 # libhacker.so
-#add_library(hacker SHARED hacker.cpp)
-#target_compile_features(hacker PUBLIC c_std_17)
-#target_compile_options(hacker PUBLIC -std=c17 -Weverything -Werror)
-#target_link_libraries(hacker plthook::plthook log)
+add_library(hacker SHARED hacker.cpp)
+target_link_libraries(
+        hacker
+        plthook
+        log
+)
 
 # libhookee.so
-#add_library(hookee SHARED hookee.cpp)
-#target_compile_features(hookee PUBLIC c_std_17)
-#target_compile_options(hookee PUBLIC -std=c17 -Weverything -Werror)
-#target_link_libraries(hookee log)
+add_library(hookee SHARED hookee.cpp)
+target_link_libraries(hookee log)
