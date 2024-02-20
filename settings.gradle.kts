@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "nativehook"
 include(":app")
 include(":plthook")
+include(":shadowhook")

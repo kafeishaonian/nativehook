@@ -3,14 +3,10 @@
 app/.gitignore,5/1/51e1c5d383dfaa35e0e7e5873a0a99355a86880f
 @
 local.properties,0/7/0712df971a99ac4d2fccb8e0fb19f377f3374cca
-C
-settings.gradle.kts,7/4/749edfcc96398253e5b3416184e95c46621da850
 \
 ,plthook/src/main/cpp/third_party/bsd/queue.h,6/7/679f806c3d7fca4c3c581fc50e1a2f5fe8f9aeeb
 [
 +plthook/src/main/cpp/third_party/bsd/tree.h,c/2/c2ad0a578c39b513ed33c759167ab3530a2ca500
-P
- plthook/src/main/cpp/bh_util.cpp,5/1/51eda040c8fbe18f026feed9584d90dbe82cbd8c
 N
 plthook/src/main/cpp/bh_util.h,f/8/f88236864b9fa17e4fcd45bea58e13cec7f14f86
 P
@@ -49,16 +45,12 @@ X
 (plthook/src/main/cpp/bh_hook_manager.cpp,3/8/38708321aa3f06e4b292e9e86f9ad46d5f3fb78d
 V
 &plthook/src/main/cpp/bh_hook_manager.h,a/7/a7ed92856f5150526489497f2628f528dc846364
-R
-"plthook/src/main/cpp/bh_linker.cpp,f/e/fe8f962d0a99b254fcf0b5a6c5606eac4e713d7d
 P
  plthook/src/main/cpp/bh_linker.h,c/2/c2fbfc3f11626da2e9be3d71e068b6c52e089596
 X
 (plthook/src/main/cpp/bh_linker_mutex.cpp,a/a/aaf55b1c0c135a8df677e5ee089a57d2e02207e0
 V
 &plthook/src/main/cpp/bh_linker_mutex.h,d/7/d7218eaf85de72b02cb3bc272281c710dbc490bc
-O
-plthook/src/main/cpp/bh_log.cpp,2/7/27d9f1c31b4a900bad7f4578147be7782658f98e
 R
 "plthook/src/main/cpp/bh_recorder.h,0/2/02a4ad7238f8875d72eecde1db17777f3c49cb13
 S
@@ -67,8 +59,6 @@ Q
 !plthook/src/main/cpp/bh_sleb128.h,4/6/46c9e74e63c064d604b7c7e2e34f78e3cd0204f9
 N
 plthook/src/main/cpp/bh_task.h,1/3/1318ea0b5c39bdc5741076ad5ffd97d4d88e12b0
-X
-(plthook/src/main/cpp/bh_task_manager.cpp,7/c/7c5f32790caccaf9c4db209ae0d52c4e6f913bae
 P
  plthook/src/main/cpp/bh_task.cpp,9/1/9149da54adc07a1503597c229b7f2b8843c26505
 R
@@ -81,8 +71,6 @@ i
 9plthook/src/main/java/com/example/plthook/ILibLoader.java,c/4/c45b4fd30ed79c946f94574d83f83e9e9263f4de
 O
 app/src/main/cpp/native-lib.cpp,0/5/05b06ab0d5ff3a29c39bddac9c41f1011ad7a055
-j
-:app/src/main/java/com/example/nativehook/NativeHookee.java,6/b/6b24e4289346d71420671e9d658aba304a8b6516
 X
 (plthook/src/main/cpp/bh_trampo_arm64.cpp,9/f/9fae64d2a89c5bb72f85857a53ad9fd663c9112b
 V
@@ -93,23 +81,7 @@ V
 &plthook/src/main/cpp/bh_trampo_x86.cpp,4/3/436a4967f961d15594c80cfd3d526f64c648aa8b
 H
 plthook/build.gradle.kts,4/2/424b3f6915a1935999f1dd978adac307d067ca15
-N
-plthook/src/main/cpp/bh_core.h,e/f/ef004f383f36004e1c104cd5ff28faf861e89b61
-V
-&plthook/src/main/cpp/include/plthook.h,b/8/b82d8f73ad3e208d86cf956946ae83c0912f56bb
 V
 &plthook/src/main/cpp/bh_dl_monitor.cpp,b/b/bbe49ce0950b004f9f7add1c398746e9d79c0290
 S
 #plthook/src/main/cpp/CMakeLists.txt,e/a/ea5a02ad0ef87684645efaddfad2dbac77b25582
-q
-Aapp/src/main/java/com/example/nativehook/MyCustomApplication.java,1/9/1926c4497f64d66342b7ec453e384679a2265362
-f
-6plthook/src/main/java/com/example/plthook/PLTHook.java,2/e/2e333c6308635380f79f546c9fc5732498b01917
-T
-$plthook/src/main/cpp/plthook_jni.cpp,a/d/ad4e50a2e4b324100f1bcf413e5aa87c507f6d48
-M
-plthook/src/main/cpp/bh_log.h,4/e/4e9641ad69faf4401d07e0c97c6b244d52ddaec8
-j
-:app/src/main/java/com/example/nativehook/NativeHacker.java,b/1/b119f631327deca260d39a054921f779c34e59b0
-D
-app/build.gradle.kts,d/2/d2a4383452aad84a18429a5844d31330a012a9e6
