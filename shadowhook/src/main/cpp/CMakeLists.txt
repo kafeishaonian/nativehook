@@ -11,6 +11,22 @@ cmake_minimum_required(VERSION 3.22.1)
 # build script scope).
 project("shadowhook")
 
+
+if(${ANDROID_ABI} STREQUAL "arm64-v8a")
+    set(ARCH "arm64")
+elseif(${ANDROID_ABI} STREQUAL "armeabi-v7a")
+    set(ARCH "arm")
+endif()
+
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../libs/${ANDROID_ABI}/)
+
+file(GLOB SRC
+        *.cpp
+        arch/arm/*.cpp
+        arch/arm64/*.cpp
+        common/*.cpp
+        third_party/*/*.cpp)
+
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
@@ -26,7 +42,7 @@ project("shadowhook")
 # used in the AndroidManifest.xml file.
 add_library(${CMAKE_PROJECT_NAME} SHARED
         # List C/C++ source files with relative paths to this CMakeLists.txt.
-        shadowhook.cpp)
+        ${SRC})
 
 # Specifies libraries CMake should link to your target library. You
 # can link libraries from various origins, such as libraries defined in this

@@ -9,10 +9,6 @@
 +plthook/src/main/cpp/third_party/bsd/tree.h,c/2/c2ad0a578c39b513ed33c759167ab3530a2ca500
 N
 plthook/src/main/cpp/bh_util.h,f/8/f88236864b9fa17e4fcd45bea58e13cec7f14f86
-P
- plthook/src/main/cpp/bytesig.cpp,4/0/402a3874b9eacedd4424ea5b2317fa23a4455e89
-N
-plthook/src/main/cpp/bytesig.h,4/a/4aab1d00beae6879c58b7e828113d88cedca3d5d
 O
 plthook/src/main/cpp/bh_cfi.cpp,9/d/9dc3769b9589f3da2ff36a04ef81a0f6392a216d
 M
@@ -79,12 +75,8 @@ Y
 )plthook/src/main/cpp/bh_trampo_x86_64.cpp,7/2/72cf99df954c2b144b9386d5de2833280c956ad4
 V
 &plthook/src/main/cpp/bh_trampo_x86.cpp,4/3/436a4967f961d15594c80cfd3d526f64c648aa8b
-H
-plthook/build.gradle.kts,4/2/424b3f6915a1935999f1dd978adac307d067ca15
 V
 &plthook/src/main/cpp/bh_dl_monitor.cpp,b/b/bbe49ce0950b004f9f7add1c398746e9d79c0290
-S
-#plthook/src/main/cpp/CMakeLists.txt,e/a/ea5a02ad0ef87684645efaddfad2dbac77b25582
 j
 :app/src/main/java/com/example/nativehook/NativeHacker.java,b/1/b119f631327deca260d39a054921f779c34e59b0
 V
@@ -127,8 +119,6 @@ w
 G.idea/sonarlint/issuestore/7/d/7d8d521c658b0a0bb73dd61e1a272309ddb1bd3a,4/b/4b839c7be58e56634ab83632f09cd7773cc65504
 M
 shadowhook/proguard-rules.pro,4/5/45af18ef9f68167536b015993d13f8fdc086ad26
-M
-shadowhook/consumer-rules.pro,e/2/e2c37152938a795e7f3d5b60878e998cd4c197d0
 w
 G.idea/sonarlint/issuestore/c/4/c45b4fd30ed79c946f94574d83f83e9e9263f4de,7/1/714a8f6cd42be68e8d9d349a4393f393b6802d99
 w
@@ -139,16 +129,12 @@ w
 G.idea/sonarlint/issuestore/b/b/bbe49ce0950b004f9f7add1c398746e9d79c0290,c/b/cb2a33d8aa245aedb6af4a4a1c255b5fd63cd7d7
 w
 G.idea/sonarlint/issuestore/1/3/1318ea0b5c39bdc5741076ad5ffd97d4d88e12b0,4/0/40fa6d5844b42b9e0809b2ae1991ce1b1c17e74d
-V
-&shadowhook/src/main/cpp/CMakeLists.txt,5/a/5a888265acd071b8c3a11f407f35c312664703b0
 w
 G.idea/sonarlint/issuestore/5/a/5a2045d2f8461fd7536d4bd4a6c5d3982f857b07,3/1/31c2d73829245315264748368bffd73a7a66f8ed
 C
 settings.gradle.kts,7/4/749edfcc96398253e5b3416184e95c46621da850
 D
 app/build.gradle.kts,d/2/d2a4383452aad84a18429a5844d31330a012a9e6
-K
-shadowhook/build.gradle.kts,9/3/9315b68bb798842acdc62ed3611a34273991927c
 ƒ
 Sshadowhook/src/androidTest/java/com/example/shadowhook/ExampleInstrumentedTest.java,b/d/bd4a8184a9aa4077af03f1ce2bd8a137b86daa2f
 t
