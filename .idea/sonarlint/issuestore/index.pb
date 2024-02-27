@@ -149,8 +149,6 @@ K
 shadowhook/build.gradle.kts,9/3/9315b68bb798842acdc62ed3611a34273991927c
 ]
 -shadowhook/src/main/cpp/arch/arm64/sh_a64.cpp,1/c/1c116c11db96fa67de600f485e9b237740e3d330
-V
-&shadowhook/src/main/cpp/shadowhook.cpp,d/6/d6967b9a435cb861f9d775f6bad9327e4035b33a
 [
 +shadowhook/src/main/cpp/arch/arm64/sh_a64.h,7/9/7977dfa23177bcf57d30866e37b5b559088ba2d3
 Y
@@ -161,8 +159,6 @@ N
 plthook/src/main/cpp/bytesig.h,4/a/4aab1d00beae6879c58b7e828113d88cedca3d5d
 P
  plthook/src/main/cpp/bytesig.cpp,4/0/402a3874b9eacedd4424ea5b2317fa23a4455e89
-W
-'shadowhook/src/main/cpp/common/sh_sig.h,8/6/86237644a7dc481716e1c32bedd2b08f9fb3ceca
 X
 (shadowhook/src/main/cpp/common/bytesig.h,3/8/38b2e21cc2aa60a2a676a09108f15e5f2fbaa14a
 Z
@@ -173,8 +169,6 @@ _
 /shadowhook/src/main/cpp/third_party/lss/LICENSE,6/f/6fd4fe1332bf0cef1c0749ca28d7d640596fc643
 _
 /shadowhook/src/main/cpp/third_party/xdl/LICENSE,b/4/b4ac15829f27d3b9ec9fea104ba7d5a6891fbf55
-Z
-*shadowhook/src/main/cpp/common/sh_util.cpp,f/8/f83432be0de7a0772cb86b1b3904a965269556ce
 J
 plthook/consumer-rules.pro,c/e/cedb830dc7b668e19d057d9d26724a34fa5ff7c8
 H
@@ -185,3 +179,29 @@ S
 .shadowhook/src/main/cpp/third_party/bsd/tree.h,1/1/11fca673a8295b763b81b9e607ba160dc0235392
 _
 /shadowhook/src/main/cpp/third_party/bsd/queue.h,d/5/d5dc42956e5e19e3583cf9b559d6c4f4d532b379
+Z
+*shadowhook/src/main/cpp/common/sh_config.h,1/0/100d097ab748eefffd377b3cd1467173d03b4539
+Y
+)shadowhook/src/main/cpp/common/sh_log.cpp,c/8/c87b1ef56995e2faf75b82b8d6631d6bdac80796
+W
+'shadowhook/src/main/cpp/common/sh_log.h,8/a/8add2db2f0cf77a7b8257705b3a2341abd5ef34a
+\
+,shadowhook/src/main/cpp/common/sh_trampo.cpp,4/b/4b703fa1e27f7d73cde12815fe62649485fc016e
+[
++shadowhook/src/main/cpp/common/sh_errno.cpp,6/d/6df66513b79cfac07a44810ece24c53b546eefd3
+Z
+*shadowhook/src/main/cpp/common/sh_trampo.h,2/9/29a45dab7e90672d4078e9e7d99eec7a50d3790c
+V
+&shadowhook/src/main/cpp/CMakeLists.txt,5/a/5a888265acd071b8c3a11f407f35c312664703b0
+Y
+)shadowhook/src/main/cpp/common/sh_errno.h,9/3/93ed6fcbe28844fe08147bc884216fb36c31751b
+W
+'shadowhook/src/main/cpp/common/sh_sig.h,8/6/86237644a7dc481716e1c32bedd2b08f9fb3ceca
+X
+(shadowhook/src/main/cpp/common/sh_util.h,8/f/8fb2a1b2e3b8317c8d3a0910063dead2ad1052db
+V
+&shadowhook/src/main/cpp/shadowhook.cpp,d/6/d6967b9a435cb861f9d775f6bad9327e4035b33a
+\
+,shadowhook/src/main/cpp/include/shadowhook.h,0/2/02ba06aeeed2ef995aa8caf1cc723e5c8f42c0d8
+Z
+*shadowhook/src/main/cpp/common/sh_util.cpp,f/8/f83432be0de7a0772cb86b1b3904a965269556ce
