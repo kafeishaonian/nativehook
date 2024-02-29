@@ -1,0 +1,24 @@
+
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¡æÉÓúÿÿÿÿ
+o	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(á¸ß£
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ø•´Èıÿÿÿÿ
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ìŸøîùÿÿÿÿ
+u	java:S115‡"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(°­Ú‡ûÿÿÿÿ
+u	java:S115ˆ"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(äÒ÷Ôùÿÿÿÿ
+u	java:S115‰"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(“¯¢¤üÿÿÿÿ
+p	java:S115Š"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ÄÄÑÛ
+p	java:S115‹"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.( ” 
+p	java:S115Œ"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Ò’İ
+p	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ÿ÷×Ç
+u	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(™ù³çüÿÿÿÿ
+u	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ó’Ä¾ûÿÿÿÿ
+@
+java:S11810"%Catch Exception instead of Throwable.(’¯í»ÿÿÿÿÿ
+@
+java:S11818"%Catch Exception instead of Throwable.(’¯í»ÿÿÿÿÿ
+@
+java:S1181?"%Catch Exception instead of Throwable.(’¯í»ÿÿÿÿÿ
+
+java:S1186®"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(æÇ¨‘ûÿÿÿÿ
+˜
+java:S1186Ø"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(é’ëØ
