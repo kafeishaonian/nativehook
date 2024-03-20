@@ -141,28 +141,12 @@ M
 shadowhook/consumer-rules.pro,e/2/e2c37152938a795e7f3d5b60878e998cd4c197d0
 K
 shadowhook/build.gradle.kts,9/3/9315b68bb798842acdc62ed3611a34273991927c
-]
--shadowhook/src/main/cpp/arch/arm64/sh_a64.cpp,1/c/1c116c11db96fa67de600f485e9b237740e3d330
 [
 +shadowhook/src/main/cpp/arch/arm64/sh_a64.h,7/9/7977dfa23177bcf57d30866e37b5b559088ba2d3
-Y
-)shadowhook/src/main/cpp/arch/arm/sh_a32.h,1/2/12146ca352b3368e43d132802f9a9ec12e4cd76d
-[
-+shadowhook/src/main/cpp/arch/arm/sh_a32.cpp,b/a/ba87f1e6030ecd438ce312ba8bcb449b1b1d6c68
 N
 plthook/src/main/cpp/bytesig.h,4/a/4aab1d00beae6879c58b7e828113d88cedca3d5d
 P
  plthook/src/main/cpp/bytesig.cpp,4/0/402a3874b9eacedd4424ea5b2317fa23a4455e89
-X
-(shadowhook/src/main/cpp/common/bytesig.h,3/8/38b2e21cc2aa60a2a676a09108f15e5f2fbaa14a
-Z
-*shadowhook/src/main/cpp/common/bytesig.cpp,5/5/5541904503879a8a2124758c3c626b2b96d4baba
-o
-?shadowhook/src/main/cpp/third_party/lss/linux_syscall_support.h,4/e/4e7fa294ec6a418dab29bba2e74d081fc6726618
-_
-/shadowhook/src/main/cpp/third_party/lss/LICENSE,6/f/6fd4fe1332bf0cef1c0749ca28d7d640596fc643
-_
-/shadowhook/src/main/cpp/third_party/xdl/LICENSE,b/4/b4ac15829f27d3b9ec9fea104ba7d5a6891fbf55
 J
 plthook/consumer-rules.pro,c/e/cedb830dc7b668e19d057d9d26724a34fa5ff7c8
 H
@@ -173,18 +157,6 @@ S
 .shadowhook/src/main/cpp/third_party/bsd/tree.h,1/1/11fca673a8295b763b81b9e607ba160dc0235392
 _
 /shadowhook/src/main/cpp/third_party/bsd/queue.h,d/5/d5dc42956e5e19e3583cf9b559d6c4f4d532b379
-Z
-*shadowhook/src/main/cpp/common/sh_config.h,1/0/100d097ab748eefffd377b3cd1467173d03b4539
-Y
-)shadowhook/src/main/cpp/common/sh_log.cpp,c/8/c87b1ef56995e2faf75b82b8d6631d6bdac80796
-\
-,shadowhook/src/main/cpp/common/sh_trampo.cpp,4/b/4b703fa1e27f7d73cde12815fe62649485fc016e
-Z
-*shadowhook/src/main/cpp/common/sh_trampo.h,2/9/29a45dab7e90672d4078e9e7d99eec7a50d3790c
-\
-,shadowhook/src/main/cpp/include/shadowhook.h,0/2/02ba06aeeed2ef995aa8caf1cc723e5c8f42c0d8
-V
-&shadowhook/src/main/cpp/shadowhook.cpp,d/6/d6967b9a435cb861f9d775f6bad9327e4035b33a
 w
 G.idea/sonarlint/issuestore/1/d/1d0c3b297dd087784ef9a0a1f423e8ef5d5ca724,4/2/422904c1e59596373ed527742f136e279f535035
 w
@@ -285,5 +257,5 @@ w
 G.idea/sonarlint/issuestore/4/b/4b839c7be58e56634ab83632f09cd7773cc65504,7/1/7106490d85ade233ea55b4d41a20b8f6830a6c8c
 w
 G.idea/sonarlint/issuestore/9/3/9315b68bb798842acdc62ed3611a34273991927c,7/8/783b11ac2992cff319e5775ca5bdec635acacb8f
-Y
-)shadowhook/src/main/cpp/common/sh_errno.h,9/3/93ed6fcbe28844fe08147bc884216fb36c31751b
+W
+'shadowhook/src/main/cpp/common/sh_log.h,8/a/8add2db2f0cf77a7b8257705b3a2341abd5ef34a

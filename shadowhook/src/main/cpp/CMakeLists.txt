@@ -25,7 +25,9 @@ file(GLOB SRC
         arch/arm/*.cpp
         arch/arm64/*.cpp
         common/*.cpp
-        third_party/*/*.cpp)
+        third_party/bsd/*.cpp
+        third_party/lss/*.cpp
+        third_party/xdl/*.cpp)
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
@@ -44,6 +46,12 @@ add_library(${CMAKE_PROJECT_NAME} SHARED
         # List C/C++ source files with relative paths to this CMakeLists.txt.
         ${SRC})
 
+target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC
+        . include
+        common
+        third_party/bsd
+        third_party/lss
+        third_party/xdl)
 # Specifies libraries CMake should link to your target library. You
 # can link libraries from various origins, such as libraries defined in this
 # build script, prebuilt third-party libraries, or Android system libraries.
