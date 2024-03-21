@@ -26,7 +26,7 @@
 
 #define SH_UTIL_IS_THUMB(address)    ((address)&1u)
 #define SH_UTIL_CLEAR_BIT0(address)  ((address)&0xFFFFFFFE)
-#define SH_UTIL_SET_BIT(address)     ((address) | 1u)
+#define SH_UTIL_SET_BIT0(address)     ((address) | 1u)
 
 #define SH_UTIL_ALIGN_4(pc) ((pc)&0xFFFFFFFC)
 #define SH_UTIL_SIGN_EXTEND_32(n, len) \
