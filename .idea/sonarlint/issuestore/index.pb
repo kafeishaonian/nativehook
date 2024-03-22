@@ -221,3 +221,13 @@ w
 G.idea/sonarlint/issuestore/9/3/9315b68bb798842acdc62ed3611a34273991927c,7/8/783b11ac2992cff319e5775ca5bdec635acacb8f
 W
 'shadowhook/src/main/cpp/common/sh_log.h,8/a/8add2db2f0cf77a7b8257705b3a2341abd5ef34a
+_
+/shadowhook/src/main/cpp/third_party/bsd/queue.h,d/5/d5dc42956e5e19e3583cf9b559d6c4f4d532b379
+^
+.shadowhook/src/main/cpp/third_party/bsd/tree.h,1/1/11fca673a8295b763b81b9e607ba160dc0235392
+o
+?shadowhook/src/main/cpp/third_party/lss/linux_syscall_support.h,4/e/4e7fa294ec6a418dab29bba2e74d081fc6726618
+X
+(shadowhook/src/main/cpp/common/sh_util.h,8/f/8fb2a1b2e3b8317c8d3a0910063dead2ad1052db
+W
+'shadowhook/src/main/cpp/common/sh_sig.h,8/6/86237644a7dc481716e1c32bedd2b08f9fb3ceca
