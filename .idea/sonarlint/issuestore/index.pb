@@ -135,8 +135,6 @@ t
 Dshadowhook/src/test/java/com/example/shadowhook/ExampleUnitTest.java,d/2/d254d90bad51b386959e72433c178365c160caf3
 f
 6plthook/src/main/java/com/example/plthook/PLTHook.java,2/e/2e333c6308635380f79f546c9fc5732498b01917
-o
-?shadowhook/src/main/java/com/example/shadowhook/ShadowHook.java,b/8/b81eae005e72fcee22e2ca05994d9d43e1226ab4
 M
 shadowhook/consumer-rules.pro,e/2/e2c37152938a795e7f3d5b60878e998cd4c197d0
 K
@@ -237,3 +235,31 @@ R
 "shadowhook/src/main/cpp/sh_enter.h,7/9/79f4a28ee5f6403d974a85a94b0d81278f313067
 Q
 !shadowhook/src/main/cpp/sh_safe.h,3/8/38ec1545053ffea5d141b38e11bc72dfec061d0e
+T
+$shadowhook/src/main/cpp/sh_enter.cpp,1/6/1669c3bceb9b9e7bc451bede37a343190e9217e0
+b
+2shadowhook/src/main/cpp/third_party/xdl/xdl_lzma.h,4/b/4b8483336cec501f7cdd4c1c515e41b190e179c8
+d
+4shadowhook/src/main/cpp/third_party/xdl/xdl_lzma.cpp,b/9/b9ab6df3acf82601e8ebd494b56965362f66f2f5
+W
+'shadowhook/src/main/cpp/common/sh_sig.h,8/6/86237644a7dc481716e1c32bedd2b08f9fb3ceca
+\
+,shadowhook/src/main/cpp/arch/arm/sh_inst.cpp,4/b/4ba3890b2cdd447903dcc5a838f5dde407dbb8fc
+S
+#shadowhook/src/main/cpp/sh_safe.cpp,b/8/b8f9979e223ff48954220d0d4daed2714db3e273
+S
+#shadowhook/src/main/cpp/sh_exit.cpp,1/4/14c25ac832958a9adf6769b54c08b76bf9584c30
+P
+ shadowhook/src/main/cpp/sh_hub.h,1/0/102b38c859ec1416802b3b5f6d9c547c4c5a6d36
+Q
+!shadowhook/src/main/cpp/sh_exit.h,5/1/5119a3f556baeb48e4e3362527744224edde840d
+R
+"shadowhook/src/main/cpp/sh_hub.cpp,e/6/e63901d98586e255d0083593fe4804f8fd4d07ef
+o
+?shadowhook/src/main/java/com/example/shadowhook/ShadowHook.java,b/8/b81eae005e72fcee22e2ca05994d9d43e1226ab4
+V
+&shadowhook/src/main/cpp/CMakeLists.txt,5/a/5a888265acd071b8c3a11f407f35c312664703b0
+V
+&shadowhook/src/main/cpp/shadowhook.cpp,d/6/d6967b9a435cb861f9d775f6bad9327e4035b33a
+R
+"shadowhook/src/main/cpp/sh_jni.cpp,8/1/81315d9e17b8074144739a39b8bbcb30cc1067f7

@@ -368,18 +368,143 @@ static void sh_hub_destroy_inner(sh_hub_t *self) {
 void sh_hub_destroy(sh_hub_t *self, bool with_delay) {
     if (SHADOWHOOK_IS_SHARED_MODE) {
         struct timeval now;
+        gettimeofday(&now, NULL);
+
+        if (!LIST_EMPTY(&sh_hub_delayed_destroy)) {
+            pthread_mutex_lock(&sh_hub_delayed_destroy_lock);
+            sh_hub_t *hub, *hub_tmp;
+            LIST_FOREACH_SAFE(hub, &sh_hub_delayed_destroy, link, hub_tmp)
+            if (now.tv_sec - hub->destroy_ts > SH_HUB_DELAY_SEC) {
+                    LIST_REMOVE(hub, link);
+                    sh_hub_destroy_inner(hub);
+            }
+            pthread_mutex_unlock(&sh_hub_delayed_destroy_lock);
+        }
+
+        if (with_delay) {
+            self->destroy_ts = now.tv_sec;
+            sh_trampo_free(&sh_hub_trampo_mgr, self->trampo);
+            self->trampo = 0;
+
+            pthread_mutex_lock(&sh_hub_delayed_destroy_lock);
+            LIST_INSERT_HEAD(&sh_hub_delayed_destroy, self, link);
+            pthread_mutex_unlock(&sh_hub_delayed_destroy_lock);
+        } else {
+            sh_hub_destroy_inner(self);
+        }
+    } else {
+        sh_hub_destroy_inner(self);
     }
 }
 
-uintptr_t sh_hub_get_orig_address(sh_hub_t *self);
+uintptr_t sh_hub_get_orig_address(sh_hub_t *self) {
+    return self->orig_address;
+}
 
-uintptr_t *sh_hub_get_orig_address_address(sh_hub_t *self);
+uintptr_t *sh_hub_get_orig_address_address(sh_hub_t *self) {
+    return &self->orig_address;
+}
 
-int sh_hub_add_proxy(sh_hub_t *self, uintptr_t func);
+int sh_hub_add_proxy(sh_hub_t *self, uintptr_t func){
+    int r = SHADOWHOOK_ERRNO_OK;
 
-int sh_hub_delete_proxy(sh_hub_t *self, uintptr_t func, bool *have_enabled_proxy);
+    pthread_mutex_lock(&self->proxies_lock);
 
-void *sh_hub_get_prev_func(void *func);
+    // check repeated funcion
+    sh_hub_proxy_t *proxy;
+    SLIST_FOREACH(proxy, &self->proxies, link) {
+        if (proxy->enabled && proxy->func == (void *)func) {
+            r = SHADOWHOOK_ERRNO_HOOK_DUP;
+            goto end;
+        }
+    }
+
+    // try to re-enable an exists item
+    SLIST_FOREACH(proxy, &self->proxies, link) {
+        if (proxy->func == (void *)func) {
+            if (!proxy->enabled) __atomic_store_n((bool *)&proxy->enabled, true, __ATOMIC_SEQ_CST);
+
+            SH_LOG_INFO("hub: add(re-enable) func %" PRIxPTR, func);
+            goto end;
+        }
+    }
+
+    // create new item
+    if (NULL == (proxy = static_cast<sh_hub_proxy_t *>(malloc(sizeof(sh_hub_proxy_t))))) {
+        r = SHADOWHOOK_ERRNO_OOM;
+        goto end;
+    }
+    proxy->func = (void *)func;
+    proxy->enabled = true;
+
+    // insert to the head of the proxy-list
+    // equivalent to: SLIST_INSERT_HEAD(&self->proxies, proxy, link);
+    // but: __ATOMIC_RELEASE ensures readers see only fully-constructed item
+    SLIST_NEXT(proxy, link) = SLIST_FIRST(&self->proxies);
+    __atomic_store_n((uintptr_t *)(&SLIST_FIRST(&self->proxies)), (uintptr_t)proxy, __ATOMIC_RELEASE);
+    SH_LOG_INFO("hub: add(new) func %" PRIxPTR, func);
+
+    end:
+    pthread_mutex_unlock(&self->proxies_lock);
+    return r;
+}
+
+int sh_hub_delete_proxy(sh_hub_t *self, uintptr_t func, bool *have_enabled_proxy) {
+    *have_enabled_proxy = false;
+
+    pthread_mutex_lock(&self->proxies_lock);
+
+    sh_hub_proxy_t *proxy;
+    bool deleted = false;
+    SLIST_FOREACH(proxy, &self->proxies, link) {
+        if (proxy->func == (void *)func) {
+            if (proxy->enabled) __atomic_store_n((bool *)&proxy->enabled, false, __ATOMIC_SEQ_CST);
+
+            deleted = true;
+            SH_LOG_INFO("hub: del func %" PRIxPTR, func);
+        }
+
+        if (proxy->enabled && !*have_enabled_proxy) *have_enabled_proxy = true;
+
+        if (deleted && *have_enabled_proxy) break;
+    }
+
+    pthread_mutex_unlock(&self->proxies_lock);
+
+    return deleted ? 0 : -1;
+}
+
+static sh_hub_frame_t *sh_hub_get_current_frame(void *return_address) {
+    sh_hub_stack_t *stack = (sh_hub_stack_t *)sh_safe_pthread_getspecific(sh_hub_stack_tls_key);
+    if (0 == stack->frames_cnt) return NULL;
+    sh_hub_frame_t *frame = &stack->frames[stack->frames_cnt - 1];
+    return frame->return_address == return_address ? frame : NULL;
+}
+
+void *sh_hub_get_prev_func(void *func) {
+    sh_hub_stack_t *stack = (sh_hub_stack_t *)sh_safe_pthread_getspecific(sh_hub_stack_tls_key);
+    if (0 == stack->frames_cnt) sh_safe_abort();  // called in a non-hook status?
+    sh_hub_frame_t *frame = &stack->frames[stack->frames_cnt - 1];
+
+    // find and return the next enabled hook-function in the hook-chain
+    bool found = false;
+    sh_hub_proxy_t *proxy;
+    SLIST_FOREACH(proxy, &(frame->proxies), link) {
+        if (!found) {
+            if (proxy->func == func) found = true;
+        } else {
+            if (proxy->enabled) break;
+        }
+    }
+    if (NULL != proxy) {
+        SH_LOG_DEBUG("hub: get_prev_func() return next enabled proxy %p", proxy->func);
+        return proxy->func;
+    }
+
+    SH_LOG_DEBUG("hub: get_prev_func() return orig_addr %p", (void *)frame->orig_addr);
+    // did not find, return the original-function
+    return (void *)frame->orig_address;
+}
 
 void sh_hub_pop_stack(void *return_address) {
     sh_hub_stack_t *stack = (sh_hub_stack_t *) sh_safe_pthread_getspecific(sh_hub_stack_tls_key);
@@ -394,9 +519,27 @@ void sh_hub_pop_stack(void *return_address) {
     }
 }
 
-void sh_hub_allow_reentrant(void *return_address);
+void sh_hub_allow_reentrant(void *return_address) {
+    sh_hub_frame_t *frame = sh_hub_get_current_frame(return_address);
+    if (NULL != frame) {
+        frame->flags |= SH_HUB_FRAME_FLAG_ALLOW_REENTRANT;
+        SH_LOG_DEBUG("hub: allow reentrant frame %p", return_address);
+    }
+}
 
-void sh_hub_disallow_reentrant(void *return_address);
+void sh_hub_disallow_reentrant(void *return_address) {
+    sh_hub_frame_t *frame = sh_hub_get_current_frame(return_address);
+    if (NULL != frame) {
+        frame->flags &= ~SH_HUB_FRAME_FLAG_ALLOW_REENTRANT;
+        SH_LOG_DEBUG("hub: disallow reentrant frame %p", return_address);
+    }
+}
 
-void *sh_hub_get_return_address(void);
+void *sh_hub_get_return_address(void){
+    sh_hub_stack_t *stack = (sh_hub_stack_t *)sh_safe_pthread_getspecific(sh_hub_stack_tls_key);
+    if (0 == stack->frames_cnt) sh_safe_abort();  // called in a non-hook status?
+    sh_hub_frame_t *frame = &stack->frames[stack->frames_cnt - 1];
+
+    return frame->return_address;
+}
 
