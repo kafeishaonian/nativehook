@@ -81,8 +81,6 @@ j
 :app/src/main/java/com/example/nativehook/NativeHacker.java,b/1/b119f631327deca260d39a054921f779c34e59b0
 V
 &plthook/src/main/cpp/include/plthook.h,b/8/b82d8f73ad3e208d86cf956946ae83c0912f56bb
-T
-$plthook/src/main/cpp/plthook_jni.cpp,a/d/ad4e50a2e4b324100f1bcf413e5aa87c507f6d48
 P
  plthook/src/main/cpp/plthook.cpp,d/e/de4430fe0cd9f06596fec9dea443aac7c0d4b3ce
 P
@@ -249,17 +247,31 @@ S
 #shadowhook/src/main/cpp/sh_safe.cpp,b/8/b8f9979e223ff48954220d0d4daed2714db3e273
 S
 #shadowhook/src/main/cpp/sh_exit.cpp,1/4/14c25ac832958a9adf6769b54c08b76bf9584c30
-P
- shadowhook/src/main/cpp/sh_hub.h,1/0/102b38c859ec1416802b3b5f6d9c547c4c5a6d36
 Q
 !shadowhook/src/main/cpp/sh_exit.h,5/1/5119a3f556baeb48e4e3362527744224edde840d
-R
-"shadowhook/src/main/cpp/sh_hub.cpp,e/6/e63901d98586e255d0083593fe4804f8fd4d07ef
+P
+ shadowhook/src/main/cpp/sh_hub.h,1/0/102b38c859ec1416802b3b5f6d9c547c4c5a6d36
 o
 ?shadowhook/src/main/java/com/example/shadowhook/ShadowHook.java,b/8/b81eae005e72fcee22e2ca05994d9d43e1226ab4
 V
-&shadowhook/src/main/cpp/CMakeLists.txt,5/a/5a888265acd071b8c3a11f407f35c312664703b0
-V
 &shadowhook/src/main/cpp/shadowhook.cpp,d/6/d6967b9a435cb861f9d775f6bad9327e4035b33a
 R
+"shadowhook/src/main/cpp/sh_hub.cpp,e/6/e63901d98586e255d0083593fe4804f8fd4d07ef
+T
+$plthook/src/main/cpp/plthook_jni.cpp,a/d/ad4e50a2e4b324100f1bcf413e5aa87c507f6d48
+R
 "shadowhook/src/main/cpp/sh_jni.cpp,8/1/81315d9e17b8074144739a39b8bbcb30cc1067f7
+W
+'shadowhook/src/main/cpp/sh_recorder.cpp,0/b/0b56fe3034b206d0dc8fcbcbf4012e33a9533ef2
+U
+%shadowhook/src/main/cpp/sh_switch.cpp,d/e/dedbd723b38bc830775567c157c5a204cd8dc318
+V
+&shadowhook/src/main/cpp/CMakeLists.txt,5/a/5a888265acd071b8c3a11f407f35c312664703b0
+U
+%shadowhook/src/main/cpp/sh_recorder.h,d/f/df8d9612fa2b9ffb4bb57e7688d8ad334d6d10ce
+S
+#shadowhook/src/main/cpp/sh_switch.h,f/e/fe2533a485143462dab0fbba16b0a87f8550c68b
+S
+#shadowhook/src/main/cpp/sh_linker.h,b/7/b7cf02e2f4786e05a075c4b48721423e1f26eac4
+U
+%shadowhook/src/main/cpp/sh_linker.cpp,a/d/adb1422338f9c21a8b3e1b2af8259c69e2a044fb
